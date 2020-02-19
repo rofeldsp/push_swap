@@ -10,12 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.c"
+#include "push_swap.h"
 
 int main(int argc, char **argv)
 {
+	char *str;
+
 	if (argc == 1)
 		print_error(ERR_ARG);
 	else
-		parse_string(argc, argv);
+		str = parse_string(argc, argv);
+	parse_stack(str);
+	free (str);
+	return (0);
 }

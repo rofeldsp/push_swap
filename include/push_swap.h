@@ -31,12 +31,12 @@
 ** Structure for stack
  */
 
-typedef struct	s_push
+typedef struct		s_list
 {
-	s_push		*next;
-	int			debug_opt;
-	int			nbr;
-}				*node;
+	struct s_push	*next;
+	int				debug_opt;
+	int				nbr;
+}					t_list;
 
 /*
 ** Function declaration

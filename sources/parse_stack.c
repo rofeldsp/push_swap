@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_string.c                                     :+:      :+:    :+:   */
+/*   parse_stack.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rofeldsp <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/19 13:52:26 by rofeldsp          #+#    #+#             */
-/*   Updated: 2020/02/19 13:52:27 by rofeldsp         ###   ########.fr       */
+/*   Created: 2020/02/19 14:56:59 by rofeldsp          #+#    #+#             */
+/*   Updated: 2020/02/19 14:57:02 by rofeldsp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-char		*parse_string(int argc, char **argv)
+t_list		*parse_stack(char *str)
 {
-	int		i;
-	int		j;
-	char	*str;
-	char 	*tmp;
+	int 	i;
+	t_list	*node;
+	t_list 	*tmp;
 
-	i = 1;
-	j = 0; // добавить про флаг -v
-	str = ft_strdup(argv[i++]);
-	while (i < argc)
+	i = 0;
+	node = malloc(sizeof(t_list));
+	node->nbr =
+	node.next = NULL;
+	tmp = node;
+	while (str[i])
 	{
-		tmp = ft_strjoin(str, " ");
-		free (str); // добавить обработку ошибок
-		str = ft_strjoin(tmp, argv[i++]);
-		free (tmp);
+		*node = malloc(sizeof(t_list));
+
 	}
-	ft_putstr(str);
-	return (str);
 }
