@@ -20,6 +20,12 @@
 # define ERR_ARG "No arguments found"
 
 /*
+** Macroses
+ */
+
+# define DEBUG	4294967296
+
+/*
 ** Libraries
  */
 
@@ -35,7 +41,7 @@ typedef struct		s_list
 {
 	struct s_push	*next;
 	int				debug_opt;
-	int				nbr;
+	__int64_t		nbr;
 }					t_list;
 
 /*
