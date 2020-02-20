@@ -12,6 +12,19 @@
 
 #include "push_swap.h"
 
+int 		stack_length(t_push *node)
+{
+	int i;
+
+	if (node == NULL)
+		return (0);
+	else
+		i = 1;
+	while (node->next != NULL)
+		i++;
+	return(i);
+}
+
 void		add_list(t_push *node, char **str)
 {
 	int 	j;
@@ -53,6 +66,8 @@ t_push		*parse_stack(char *str)
 		j++;
 	if (j == ft_strlen(str2[i]))
 		node->nbr = ft_atoi(str2[i++]);
+	else
+		print_error(STD_ERR);
 	node->next = NULL;
 	node->prev = NULL;
 	if (*str2 + 1)

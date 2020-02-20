@@ -19,6 +19,7 @@
 
 # define ERR_ARG 	"No arguments found\n"
 # define ERR_MALLOC "Failed to allocate the memory\n"
+# define STD_ERR	"Error: input should consist from digits only"
 
 /*
 ** Macroses
@@ -62,5 +63,7 @@ void 		ft_push(t_push *node1, t_push *node2);
 t_push 		*ft_rotate(t_push *node);
 void 		free_node(t_push *node);
 t_push		*ft_reverse(t_push *node);
+void		ft_solve(t_push *node1);
+int 		stack_length(t_push *node);
 
 #endif
