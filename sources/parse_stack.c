@@ -12,53 +12,54 @@
 
 #include "push_swap.h"
 
-__int64_t 	parse_nbr(char **str)
+void		add_list(t_push *node, char **str)
 {
-	int			i;
-	__int64_t 	result;
+	int 	j;
+	t_push	*node2;
 
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '-' && str[i + 1] == 'v')
-			return (result |= DEBUG);
-		else if (str[i] >= '0' && str[i] <= '9')
-		{
-			while (str[i] >= 0 && str[i] <= '9')
-
-		}
-	}
+	if (!(node2 = malloc(sizeof(t_push))))
+		print_error(ERR_MALLOC);
+	node2->debug_opt = node->debug_opt;
+	node2->next = NULL;
+	node->next = node2;
+	node2->prev = node;
+	j = 0;
+	while (ft_isdigit(str[0][j]))
+		j++;
+	if (j == ft_strlen(str[0]))
+		node2->nbr = ft_atoi(str[0]);
+	if (*(str + 1))
+		add_list(node2, str + 1);
 }
 
-t_list		*parse_stack(char *str)
+t_push		*parse_stack(char *str)
 {
 	int 	i;
 	int		j;
-	t_list	*node;
-	t_list 	*tmp;
+	t_push	*node;
 	char	**str2;
 
 	i = 0;
-	*node = malloc(sizeof(t_list));
+	j = 0;
+	if (!(node = malloc(sizeof(t_push))))
+		print_error(ERR_MALLOC);
 	str2 = ft_strsplit(str, ' ');
 	if (ft_strequ(str2[0], "-v"))
 	{
 		node->debug_opt |= DEBUG;
 		i++;
 	}
-	while (str2[i])
-	{
-		j = 0;
-		if (i != 0)
-		while (ft_isdigit(str[i][j]))
-			j++;
-		if (j = ft_strlen(str[i]))
-			node->nbr = ft_itoa(str[i]);
-	}
-	// нужен цикл, возможно вложенная функция, чтобы выделялась память под структуру,
-	// а потом уже возвращался указатель на первый элемент. Либо вложенную функцию
-	// надо написать, либо придумать, как использовать библиотечную функцию
-//	node->nbr = parse_nbr(&str); // добавить обработку DEBUG
+	while (ft_isdigit(str2[i][j]))
+		j++;
+	if (j == ft_strlen(str2[i]))
+		node->nbr = ft_atoi(str2[i++]);
 	node->next = NULL;
-	tmp = node;
+	node->prev = NULL;
+	if (*str2 + 1)
+		add_list(node, str2 + 1);
+	i = 0;
+	while (str2[i])
+		free(str2[i++]);
+	free(str2);
+	return(node);
 }

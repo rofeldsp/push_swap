@@ -21,14 +21,17 @@ char		*parse_string(int argc, char **argv)
 
 	i = 1;
 	j = 0; // добавить про флаг -v
-	str = ft_strdup(argv[i++]);
+	if (!(str = ft_strdup(argv[i++])))
+		print_error(ERR_MALLOC);
 	while (i < argc)
 	{
-		tmp = ft_strjoin(str, " ");
+		if (!(tmp = ft_strjoin(str, " ")))
+			print_error(ERR_MALLOC);
 		free (str); // добавить обработку ошибок
-		str = ft_strjoin(tmp, argv[i++]);
+		if (!(str = ft_strjoin(tmp, argv[i++])))
+			print_error(ERR_MALLOC);
 		free (tmp);
 	}
-	ft_putstr(str);
+//	ft_putstr(str);
 	return (str);
 }

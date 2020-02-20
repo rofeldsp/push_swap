@@ -12,15 +12,36 @@
 
 #include "push_swap.h"
 
+void free_node(t_push *node)
+{
+	t_push *tmp;
+
+	while (node != NULL)
+	{
+		tmp = node;
+		node = node->next;
+		free(tmp);
+	}
+
+}
+
 int main(int argc, char **argv)
 {
 	char *str;
+	t_push *node;
+	t_push *node2;
 
+	node2 = malloc(sizeof(t_push));
+	node2->next = NULL;
+	node2->prev = NULL;
+	node2->nbr = 5;
 	if (argc == 1)
 		print_error(ERR_ARG);
 	else
 		str = parse_string(argc, argv);
-	parse_stack(str);
+	node = parse_stack(str);
+	ft_push(node, node2);
+	free_node(node);
 	free (str);
 	return (0);
 }
