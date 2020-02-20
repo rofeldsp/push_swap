@@ -33,12 +33,13 @@ void		ft_push(t_push *node1, t_push *node2)
 	tmp = node1->next;
 	if (node2->nbr == EMPTY_NODE)
 	{
-		node2 = node1;
+		*node2 = *node1;
 		node2->next = NULL;
 		node2->prev = NULL;
 	}
 	else
 	{
+//		ft_lstadd(&node2, node1); // попробовать сделать с функциями listadd, listdel. Разобрать с двойными указателями на структуры.
 		tmp2 = node1;
 		node2->prev = tmp2;
 		tmp2->next = node2;

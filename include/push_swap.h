@@ -46,6 +46,7 @@ typedef struct		s_push
 	struct s_push	*prev;
 	int				debug_opt;
 	__int64_t		nbr;
+	int 			marker;
 }					t_push;
 
 /*

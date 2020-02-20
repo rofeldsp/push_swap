@@ -21,7 +21,10 @@ int 		stack_length(t_push *node)
 	else
 		i = 1;
 	while (node->next != NULL)
+	{
+		node = node->next;
 		i++;
+	}
 	return(i);
 }
 
