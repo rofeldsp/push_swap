@@ -91,12 +91,12 @@ t_push 	*push_2_scnd_stack(t_push *node1)
 {
 	t_push *node2;
 
-	node2 = malloc(sizeof(t_push));
+	node2 = allocate_struct(sizeof(t_push));
 	node2->nbr = EMPTY_NODE;
 	while (node1)
 	{
 		if (node1->marker == 1)
-			ft_push(node1, node2);
+			ft_push(&node1, &node2);
 		else
 			node1 = node1->next;
 	}

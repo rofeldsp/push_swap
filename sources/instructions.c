@@ -25,30 +25,25 @@ t_push		*ft_swap(t_push *node)
 	return (tmp);
 }
 
-void		ft_push(t_push *node1, t_push *node2)
+void		ft_push(t_push **node1, t_push **node2)
 {
-	t_push *tmp;
-	t_push *tmp2;
+	t_push *tmp1;
 
-	tmp = node1->next;
-	if (node2->nbr == EMPTY_NODE)
+	tmp1 = allocate_struct(sizeof(t_push));
+	*tmp1 = **node1;
+	tmp1->prev = NULL;
+	if ((*node2)->nbr == EMPTY_NODE)
 	{
-		*node2 = *node1;
-		node2->next = NULL;
-		node2->prev = NULL;
+		tmp1->next = NULL;
+		*node2 = tmp1;
 	}
 	else
 	{
-//		ft_lstadd(&node2, node1); // попробовать сделать с функциями listadd, listdel. Разобрать с двойными указателями на структуры.
-		tmp2 = node1;
-		node2->prev = tmp2;
-		tmp2->next = node2;
-		*node2 = *tmp2;
+		tmp1->next = *node2;
+		*node2 = tmp1;
 	}
-	*node1 = *tmp;
-	node1->prev = NULL;
-//	*node2 = *(node2->prev);
-//	node2 = node2->prev;
+	*node1 = (*node1)->next;
+	(*node1)->prev = NULL;
 }
 
 t_push		*ft_rotate(t_push *node)
@@ -72,11 +67,19 @@ t_push		*ft_reverse(t_push *node)
 {
 	t_push	*tmp;
 
-	tmp = node;
-	while(node->next != NULL)
+	while (node->next != NULL)
 		node = node->next;
-	node->prev->next = NULL;
-	node->next = tmp;
-	node->prev = NULL;
+	tmp = node;
+	if (node->prev != NULL)
+	{
+		node = node->prev;
+		node->next = NULL;
+		while (node->prev != NULL)
+			node = node->prev;
+		node->prev = tmp;
+		node->prev->next = node;
+		node = node->prev;
+		node->prev =  NULL;
+	}
 	return (node);
 }
