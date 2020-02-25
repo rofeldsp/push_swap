@@ -46,8 +46,9 @@ t_push	*go_to_start(t_push *node)
 }
 
 /*
-** Define whether node is closer to start or end of the linked list,
-** move it to head of the linked list and push it to stack1.
+** Define whether node is closer to start or end of the stack #2,
+** move it to head of the linked list and push it to stack#1. But firstly,
+** rotate stack #1.
  */
 
 void	move_node_back(t_push **node1, t_push **node2, t_push **head)
@@ -58,23 +59,32 @@ void	move_node_back(t_push **node1, t_push **node2, t_push **head)
 	else
 		while ((*node2)->prev != NULL)
 			*head = ft_rotate(*head);
-	ft_push(node2, node1);
+	*node1 = sort_first_stack(*node1, (*node1)->nbr);
+	ft_push(&node2, &node1);
 }
 
 void	sort_stacks(t_push **node1, t_push **node2)
 {
-	 int i = -2147483648;
-//	 t_push *head2;
+	 int i;
+	 t_push *head2;
 
-//	 head2 = *node2;
-	 while (i <= 2147483647)
+	 head2 = *node2;
+	 i = find_smallest_nbr(*node2);
+	 while (*node2 != NULL)
 	 {
 	 	while ((*node2)->next != NULL)
 		{
-
+			if ((*node2)->nbr == i && *node2 != NULL)
+				move_node_back(node1, node2, &head2);
+			else if (*node2 != NULL)
+				*node2 = (*node2)->next;
+			else
+				break ;
 		}
-	 		if ((*node2)->nbr == i)
-				move_node_back(node1, node2, node2);
-
+		 if (*node2 != NULL)
+			 *node2 = go_to_start(*node2);
+		 else
+			 break ;
+		i++;
 	 }
 }

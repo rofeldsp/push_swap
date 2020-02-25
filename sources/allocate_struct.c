@@ -18,5 +18,7 @@ t_push		*allocate_struct(size_t size)
 
 	if (!(node = malloc(size)))
 		print_error(ERR_MALLOC);
+	node->next = NULL;
+	node->prev = NULL;
 	return (node);
 }

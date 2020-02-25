@@ -100,18 +100,18 @@ void	leave_marks(t_push *node1, int buf)
 ** Push all marked items of stack to stack2.
  */
 
-t_push 	*push_to_scnd_stack(t_push *node1)
+t_push 	*push_to_scnd_stack(t_push **node1)
 {
 	t_push *node2;
 
 	node2 = allocate_struct(sizeof(t_push));
 	node2->nbr = EMPTY_NODE;
-	while (node1)
+	while (count_marked_nodes(*node1) > 0)
 	{
-		if (node1->marker == 1)
-			ft_push(&node1, &node2);
+		if ((*node1)->marker == 1)
+			ft_push(node1, &node2);
 		else
-			node1 = node1->next;
+			*node1 = ft_rotate(*node1);
 	}
 	return (node2);
 }
@@ -127,8 +127,8 @@ void	ft_solve(t_push *node1)
 
 	buf = buf_sequence(node1);
 	leave_marks(node1, buf); // после этого этапа пропадает указатель на prev - пофиксить
-	node2 = push_to_scnd_stack(node1);
+	node2 = push_to_scnd_stack(&node1);
 	sort_stacks(&node1, &node2);
-
+	buf = 2;
 }
 

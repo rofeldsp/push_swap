@@ -27,24 +27,42 @@ t_push		*ft_swap(t_push *node)
 
 void		ft_push(t_push **node1, t_push **node2)
 {
-	t_push *tmp1;
+	t_push *tmp;
 
-	tmp1 = allocate_struct(sizeof(t_push));
-	*tmp1 = **node1;
-	tmp1->prev = NULL;
+	tmp = (*node1)->next;
 	if ((*node2)->nbr == EMPTY_NODE)
 	{
-		tmp1->next = NULL;
-		*node2 = tmp1;
+		*node2 = *node1;
+		(*node2)->next = NULL;
+		(*node2)->prev = NULL;
 	}
 	else
 	{
-		tmp1->next = *node2;
-		*node2 = tmp1;
+		(*node1)->next = *node2;
+		(*node2)->prev = *node1;
+		*node2 = *node1;
 	}
-	*node1 = (*node1)->next;
+	*node1 = tmp;
 	(*node1)->prev = NULL;
-	free(tmp1);
+//	t_push *tmp1;
+//
+//	tmp1 = allocate_struct(sizeof(t_push));
+//	*tmp1 = **node1;
+//	tmp1->prev = NULL;
+//	if ((*node2)->nbr == EMPTY_NODE)
+//	{
+//		tmp1->next = NULL;
+//		*node2 = tmp1;
+//	}
+//	else
+//	{
+//		tmp1->next = *node2;
+//		(*node2)->prev = tmp1;
+//		*node2 = tmp1;
+//	}
+//	*node1 = (*node1)->next;
+//	(*node1)->prev = NULL;
+//	free(tmp1);
 }
 
 t_push		*ft_rotate(t_push *node)
