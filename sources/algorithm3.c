@@ -33,7 +33,7 @@ int 	find_smallest_nbr(t_push *node)
 	i = node->nbr;
 	while (node != NULL)
 	{
-		if (node->nbr > i)
+		if (node->nbr < i)
 			i = node->nbr;
 		node = node->next;
 	}
@@ -48,7 +48,7 @@ t_push	*sort_first_stack(t_push *node, int nbr)
 	while (nbr > node->nbr)
 		node = node->next;
 	if (len_to_start(node) > len_to_end(node))
-		while ((node)->next != NULL)
+		while ((node)->prev != NULL)
 			head = ft_reverse(head);
 	else
 		while ((node)->prev != NULL)

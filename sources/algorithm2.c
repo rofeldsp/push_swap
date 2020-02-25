@@ -54,13 +54,13 @@ t_push	*go_to_start(t_push *node)
 void	move_node_back(t_push **node1, t_push **node2, t_push **head)
 {
 	if (len_to_start(*node2) > len_to_end(*node2))
-		while ((*node2)->next != NULL)
+		while ((*node2)->prev != NULL)
 			*head = ft_reverse(*head);
 	else
 		while ((*node2)->prev != NULL)
 			*head = ft_rotate(*head);
-	*node1 = sort_first_stack(*node1, (*node1)->nbr);
-	ft_push(&node2, &node1);
+	*node1 = sort_first_stack(*node1, (*node2)->nbr);
+	ft_push(node2, node1);
 }
 
 void	sort_stacks(t_push **node1, t_push **node2)
@@ -68,12 +68,12 @@ void	sort_stacks(t_push **node1, t_push **node2)
 	 int i;
 	 t_push *head2;
 
-	 head2 = *node2;
-	 i = find_smallest_nbr(*node2);
 	 while (*node2 != NULL)
 	 {
-	 	while ((*node2)->next != NULL)
+	 	while ((*node2) != NULL)
 		{
+			i = find_smallest_nbr(*node2);
+			head2 = *node2;
 			if ((*node2)->nbr == i && *node2 != NULL)
 				move_node_back(node1, node2, &head2);
 			else if (*node2 != NULL)
@@ -87,4 +87,5 @@ void	sort_stacks(t_push **node1, t_push **node2)
 			 break ;
 		i++;
 	 }
+	 *node1 = sort_first_stack(*node1, find_smallest_nbr(*node1) - 1);
 }

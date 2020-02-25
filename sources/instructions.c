@@ -43,7 +43,8 @@ void		ft_push(t_push **node1, t_push **node2)
 		*node2 = *node1;
 	}
 	*node1 = tmp;
-	(*node1)->prev = NULL;
+	if (*node1 != NULL)
+		(*node1)->prev = NULL;
 //	t_push *tmp1;
 //
 //	tmp1 = allocate_struct(sizeof(t_push));
