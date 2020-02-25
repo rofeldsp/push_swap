@@ -66,5 +66,10 @@ t_push		*ft_reverse(t_push *node);
 void		ft_solve(t_push *node1);
 int 		stack_length(t_push *node);
 t_push		*allocate_struct(size_t size);
+t_push	 	*push_to_scnd_stack(t_push *node1);
+void		leave_marks(t_push *node1, int buf);
+int 		buf_sequence(t_push *node1);
+int 		check_sequence(t_push *node);
+void		sort_stacks(t_push **node1, t_push **node2);
 
 #endif

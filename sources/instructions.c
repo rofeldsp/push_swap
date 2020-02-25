@@ -44,6 +44,7 @@ void		ft_push(t_push **node1, t_push **node2)
 	}
 	*node1 = (*node1)->next;
 	(*node1)->prev = NULL;
+	free(tmp1);
 }
 
 t_push		*ft_rotate(t_push *node)

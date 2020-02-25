@@ -36,6 +36,11 @@ int 	check_sequence(t_push *node)
 	return (i);
 }
 
+/*
+** Find the longest sequence of sorted ints in the stack and remember
+** its starting point
+ */
+
 int 	buf_sequence(t_push *node1)
 {
 	int		i;
@@ -60,7 +65,11 @@ int 	buf_sequence(t_push *node1)
 	return (buf);
 }
 
-void	leave_markers(t_push *node1, int buf)
+/*
+** Mark all nodes which are out of order and should be pushed to stack2.
+ */
+
+void	leave_marks(t_push *node1, int buf)
 {
 	int num;
 	int buf2;
@@ -87,7 +96,11 @@ void	leave_markers(t_push *node1, int buf)
 		node1 = ft_reverse(node1);
 }
 
-t_push 	*push_2_scnd_stack(t_push *node1)
+/*
+** Push all marked items of stack to stack2.
+ */
+
+t_push 	*push_to_scnd_stack(t_push *node1)
 {
 	t_push *node2;
 
@@ -103,13 +116,19 @@ t_push 	*push_2_scnd_stack(t_push *node1)
 	return (node2);
 }
 
+/*
+ * Function responsible for finding solution
+ */
+
 void	ft_solve(t_push *node1)
 {
 	int 	buf;
 	t_push 	*node2;
 
 	buf = buf_sequence(node1);
-	leave_markers(node1, buf); // после этого этапа пропадает указатель на prev - пофиксить
-	node2 = push_2_scnd_stack(node1);
+	leave_marks(node1, buf); // после этого этапа пропадает указатель на prev - пофиксить
+	node2 = push_to_scnd_stack(node1);
+	sort_stacks(&node1, &node2);
+
 }
 
