@@ -113,5 +113,6 @@ void		ft_push_out(t_push **node1, t_push **node2,
 t_push		*ft_rotate_out(t_push *node, t_output **out, int stack_n);
 t_push		*ft_swap_out(t_push *node, t_output **out, int stack_n);
 t_output	*addlist_to_output(t_output **out);
+t_output	*combine_rotations(t_output **out);
 
 #endif

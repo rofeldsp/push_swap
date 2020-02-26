@@ -133,6 +133,6 @@ void	ft_solve(t_push *node1)
 	sort_stacks(&node1, &node2, &out);
 	while (out->prev != NULL)
 		out = out->prev;
-	out = combine_rotations(&out, &out);
+	out = combine_rotations(&out);
 }
 
