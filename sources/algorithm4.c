@@ -19,4 +19,4 @@
 ** pushes.
  */
 
-t_output	*sort_output()
+//t_output	*sort_output()

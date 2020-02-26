@@ -12,24 +12,26 @@
 
 #include "push_swap.h"
 
-void		addlist_to_output(t_output **out)
+t_output 		*addlist_to_output(t_output **out)
 {
-	if (*out == NULL)
-		*out = allocate_output_struct(sizeof(t_output));
+	if ((*out)->oper == 0)
+		return (*out);
+//		*out = allocate_output_struct(sizeof(t_output));
 	else
 	{
 		(*out)->next = allocate_output_struct(sizeof(t_output));
 		(*out)->next->prev = *out;
 		*out = (*out)->next;
 	}
+	return (*out);
 }
 
 t_push		*ft_swap_out(t_push *node, t_output **out, int stack_n)
 {
 	t_push *tmp;
 
-	addlist_to_output(out);
-	(*out)->oper = (stack_n == 1 ? SWAP_A : SWAP_B);
+	*out = addlist_to_output(out);
+	(*out)->oper |= (stack_n == 1 ? SWAP_A : SWAP_B);
 	tmp = node->next;
 	node->next = node->next->next;
 	tmp->next = node;
@@ -42,8 +44,8 @@ void		ft_push_out(t_push **node1, t_push **node2, t_output **out, int s_n)
 {
 	t_push *tmp;
 
-	addlist_to_output(out);
-	(*out)->oper = (s_n == 1 ? PUSH_A : PUSH_B);
+	*out = addlist_to_output(out);
+	(*out)->oper |= (s_n == 1 ? PUSH_A : PUSH_B);
 	tmp = (*node1)->next;
 	if ((*node2)->nbr == EMPTY_NODE)
 	{
@@ -86,8 +88,8 @@ t_push		*ft_rotate_out(t_push *node, t_output **out, int stack_n)
 	t_push	*tmp;
 	t_push	*head;
 
-	addlist_to_output(out);
-	(*out)->oper = (stack_n == 1 ? ROT_A : ROT_B);
+	*out = addlist_to_output(out);
+	(*out)->oper |= (stack_n == 1 ? ROT_A : ROT_B);
 	head = node->next;
 	tmp = node->next;
 	while (tmp->next != NULL)
@@ -103,8 +105,8 @@ t_push		*ft_reverse_out(t_push *node, t_output **out, int stack_n)
 {
 	t_push	*tmp;
 
-	addlist_to_output(out);
-	(*out)->oper = (stack_n == 1 ? RROT_A : RROT_B);
+	*out = addlist_to_output(out);
+	(*out)->oper |= (stack_n == 1 ? RROT_A : RROT_B);
 	while (node->next != NULL)
 		node = node->next;
 	tmp = node;
