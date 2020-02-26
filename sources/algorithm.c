@@ -122,13 +122,13 @@ t_push 	*push_to_scnd_stack(t_push **node1)
 
 void	ft_solve(t_push *node1)
 {
-	int 	buf;
-	t_push 	*node2;
+	int 		buf;
+	t_push 		*node2;
+	t_output	*out;
 
 	buf = buf_sequence(node1);
 	leave_marks(node1, buf); // после этого этапа пропадает указатель на prev - пофиксить
 	node2 = push_to_scnd_stack(&node1);
 	sort_stacks(&node1, &node2);
-	buf = 2;
 }
 

@@ -28,6 +28,17 @@
 # define DEBUG	2
 # define EMPTY_NODE 4294967296
 
+# define PUSH_A 1
+# define PUSH_B 2
+# define SWAP_A 4
+# define SWAP_B 8
+# define ROT_A	16
+# define ROT_B	32
+# define RROT_A 64
+# define RROT_B 128
+# define RR		256
+# define RRR	512
+
 /*
 ** Libraries
  */
@@ -48,6 +59,17 @@ typedef struct		s_push
 	__int64_t		nbr;
 	int 			marker;
 }					t_push;
+
+/*
+** Structure for output
+ */
+
+typedef struct		s_output
+{
+	struct s_output	*next;
+	struct s_output	*prev;
+	int 			oper;
+}					t_output;
 
 /*
 ** Function declaration
@@ -76,5 +98,13 @@ int 		find_smallest_nbr(t_push *node);
 int 		len_to_start(t_push *node);
 int 		len_to_end(t_push *node);
 t_push		*sort_first_stack(t_push *node, int nbr);
+t_push		*rotate_ascending(t_push *node);
+t_output	*allocate_output_struct(size_t size);
+t_push		*ft_reverse_out(t_push *node, t_output **out, int stack_n);
+void		ft_push_out(t_push **node1, t_push **node2,
+													t_output **out, int s_n);
+t_push		*ft_rotate_out(t_push *node, t_output **out, int stack_n);
+t_push		*ft_swap_out(t_push *node, t_output **out, int stack_n);
+void		addlist_to_output(t_push **out);
 
 #endif

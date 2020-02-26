@@ -68,7 +68,8 @@ void	sort_stacks(t_push **node1, t_push **node2)
 	 int i;
 	 t_push *head2;
 
-	 while (*node2 != NULL)
+	*node1 = rotate_ascending(*node1);
+	while (*node2 != NULL)
 	 {
 	 	while ((*node2) != NULL)
 		{
@@ -87,5 +88,5 @@ void	sort_stacks(t_push **node1, t_push **node2)
 			 break ;
 		i++;
 	 }
-	 *node1 = sort_first_stack(*node1, find_smallest_nbr(*node1) - 1);
+	*node1 = rotate_ascending(*node1);
 }
