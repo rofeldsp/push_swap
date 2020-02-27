@@ -23,7 +23,14 @@ t_push *rotate_to_push(t_push *node, t_push *head, t_output **out)
 	return (node);
 }
 
-t_push *what_to_push(t_push *node, t_output **out)
+int		len_to_move(t_push *node)
+{
+// посчитать здесь в цикле, сколько уйдет для каждой фигуры шагов, чтобы ее
+// переместить обратно. Выбрать, что перемещаем, и вернуть указатель на этот
+// элемент списка.
+}
+
+t_push	*what_to_push(t_push *node, t_output **out)
 {
 	int		len_to_edge;
 	int		len_buf;
