@@ -38,6 +38,7 @@
 # define RROT_B 128
 # define RR		256
 # define RRR	512
+# define SS		1024
 
 /*
 ** Libraries
@@ -114,5 +115,6 @@ t_push		*ft_rotate_out(t_push *node, t_output **out, int stack_n);
 t_push		*ft_swap_out(t_push *node, t_output **out, int stack_n);
 t_output	*addlist_to_output(t_output **out);
 t_output	*combine_rotations(t_output **out);
+void		display_output(t_output *out);
 
 #endif

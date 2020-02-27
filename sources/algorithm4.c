@@ -25,6 +25,43 @@ t_output 	*delete_node(t_output **out)
 	return (nex);
 }
 
+void 		display_output2(t_output *out)
+{
+	if (out->oper == ROT_A)
+		write(1, "ra", 2);
+	else if (out->oper == ROT_B)
+		write(1, "rb", 2);
+	else if (out->oper == RR)
+		write(1, "rr", 2);
+	else if (out->oper == RROT_A)
+		write(1, "rra", 3);
+	else if (out->oper == RROT_B)
+		write(1, "rrb", 3);
+	else if (out->oper == RRR)
+		write(1, "rrr", 3);
+}
+
+void		display_output(t_output *out)
+{
+	while (out != NULL)
+	{
+		if (out->oper == SWAP_A)
+			write(1, "sa", 2);
+		else if (out->oper == SWAP_B)
+			write(1, "sb", 2);
+		else if (out->oper == SS)
+			write(1, "ss", 2);
+		else if (out->oper == PUSH_A)
+			write(1, "pa", 2);
+		else if (out->oper == PUSH_B)
+			write(1, "pb", 2);
+		display_output2(out);
+		if (out->next != NULL)
+			write(1, "\n", 1);
+		out = out->next;
+	}
+}
+
 /*
 ** Function that goes through all instructions of stacks ought to be printed
 ** and substitutes all the rotation_a and rotation_b with rotate_both and

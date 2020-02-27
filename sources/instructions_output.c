@@ -45,7 +45,7 @@ void		ft_push_out(t_push **node1, t_push **node2, t_output **out, int s_n)
 	t_push *tmp;
 
 	*out = addlist_to_output(out);
-	(*out)->oper |= (s_n == 1 ? PUSH_A : PUSH_B);
+	(*out)->oper |= (s_n == 1 ? PUSH_B : PUSH_A);
 	tmp = (*node1)->next;
 	if ((*node2)->nbr == EMPTY_NODE)
 	{
