@@ -42,7 +42,7 @@ void		add_list(t_push *node, char **str)
 	j = 0;
 	while (ft_isdigit(str[0][j]))
 		j++;
-	if (j == ft_strlen(str[0]))
+	if (j == (int)ft_strlen(str[0]))
 		node2->nbr = ft_atoi(str[0]);
 	if (*(str + 1))
 		add_list(node2, str + 1);
@@ -65,9 +65,11 @@ t_push		*parse_stack(char *str)
 		node->debug_opt |= DEBUG;
 		i++;
 	}
+	if (str2[i][j] == '-')
+		j++;
 	while (ft_isdigit(str2[i][j]))
 		j++;
-	if (j == ft_strlen(str2[i]))
+	if (j == (int)ft_strlen(str2[i]))
 		node->nbr = ft_atoi(str2[i++]);
 	else
 		print_error(STD_ERR);

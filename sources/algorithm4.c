@@ -101,25 +101,15 @@ t_output	*combine_rotations(t_output **out)
 		{
 			if (count_ra != 0 && count_rb != 0)
 			{
-				if ((*out)->oper & ROT_A)
-					*out = delete_node(out);
-				else if ((*out)->oper & ROT_B)
-				{
-					count_ra--;
-					count_rb--;
-					(*out)->oper = RR;
-				}
+				*out = put_rr(out);
+				count_ra--;
+				count_rb--;
 			}
 			else if (count_rra != 0 && count_rrb != 0)
 			{
-				if ((*out)->oper & RROT_A)
-					delete_node(out);
-				else if ((*out)->oper & RROT_B)
-				{
-					count_rra--;
-					count_rrb--;
-					(*out)->oper = RRR;
-				}
+				*out = put_rrr(out);
+				count_rra--;
+				count_rrb--;
 			}
 			*out = (*out)->prev;
 		}

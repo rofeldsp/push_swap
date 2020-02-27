@@ -31,7 +31,10 @@ int main(int argc, char **argv)
 	t_push *node;
 
 	if (argc == 1)
+	{
 		print_error(ERR_ARG);
+		exit(33); // почему без этого не компилится?
+	}
 	else
 		str = parse_string(argc, argv);
 	node = parse_stack(str);

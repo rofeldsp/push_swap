@@ -17,12 +17,12 @@ int 	len_to_end(t_push *node)
 	int i;
 
 	i = 0;
-	while (node->next != 0)
+	while (node->next != NULL)
 	{
 		i++;
 		node = node->next;
 	}
-	return (i);
+	return (i + 1);
 }
 
 int 	len_to_start(t_push *node)
@@ -30,7 +30,7 @@ int 	len_to_start(t_push *node)
 		int i;
 
 		i = 0;
-		while (node->prev != 0)
+		while (node->prev != NULL)
 		{
 			i++;
 			node = node->prev;
@@ -75,7 +75,7 @@ void	sort_stacks(t_push **node1, t_push **node2, t_output **out)
 	 	while ((*node2) != NULL)
 		{
 			i = find_smallest_nbr(*node2);
-			head2 = *node2;
+			head2 = go_to_start(*node2);
 			if ((*node2)->nbr == i && *node2 != NULL)
 				move_node_back(node1, node2, &head2, out);
 			else if (*node2 != NULL)

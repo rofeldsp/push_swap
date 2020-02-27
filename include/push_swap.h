@@ -89,23 +89,19 @@ t_push		*ft_reverse(t_push *node);
 void		ft_solve(t_push *node1);
 int 		stack_length(t_push *node);
 t_push		*allocate_struct(size_t size);
-//t_push	 	*push_to_scnd_stack(t_push **node1);
 t_push 		*push_to_scnd_stack(t_push **node1, t_output **out);
 void		leave_marks(t_push *node1, int buf);
 void		move_node_back(t_push **node1, t_push **node2, t_push **head,
 						   t_output **out);
 int 		buf_sequence(t_push *node1);
 int 		check_sequence(t_push *node);
-//void		sort_stacks(t_push **node1, t_push **node2);
 void		sort_stacks(t_push **node1, t_push **node2, t_output **out);
 int 		count_marked_nodes(t_push *node);
 int 		find_smallest_nbr(t_push *node);
 t_push		*go_to_start(t_push *node);
 int 		len_to_start(t_push *node);
 int 		len_to_end(t_push *node);
-//t_push		*sort_first_stack(t_push *node, int nbr);
 t_push		*sort_first_stack(t_push *node, int nbr, t_output **out);
-//t_push		*rotate_ascending(t_push *node);
 t_push		*rotate_ascending(t_push *node, t_output **out);
 t_output	*allocate_output_struct(size_t size);
 t_push		*ft_reverse_out(t_push *node, t_output **out, int stack_n);
@@ -116,5 +112,10 @@ t_push		*ft_swap_out(t_push *node, t_output **out, int stack_n);
 t_output	*addlist_to_output(t_output **out);
 t_output	*combine_rotations(t_output **out);
 void		display_output(t_output *out);
+t_push 		*what_to_push(t_push *node, t_output **out);
+t_push 		*rotate_to_push(t_push *node, t_push *head, t_output **out);
+t_output 	*delete_node(t_output **out);
+t_output 	*put_rr(t_output **out);
+t_output 	*put_rrr(t_output **out);
 
 #endif
