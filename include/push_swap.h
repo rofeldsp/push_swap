@@ -27,6 +27,7 @@
 
 # define DEBUG	2
 # define EMPTY_NODE 4294967296
+# define BUFFER		10
 
 # define PUSH_A 1
 # define PUSH_B 2
@@ -47,6 +48,8 @@
 #include "../libft/libft.h"
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/uio.h>
 
 /*
 ** Structure for stack
