@@ -36,6 +36,33 @@ void	parse_instructions(char *str, t_push **node1)
 			ft_push(&node2, node1);
 		else if (ft_strncmp(str, "pb", 2))
 			ft_push(node1, &node2);
+		else if (ft_strncmp(str, "sa", 2))
+			*node1 = ft_swap(*node1); // обработать случай, когда всего 1 элемент
+		else if (ft_strncmp(str, "sb", 2))
+			node2 = ft_swap(node2); // добавить обработку случая, всего одна нода есть
+		else if (ft_strncmp(str, "ss", 2))
+		{
+			*node1 = ft_swap(*node1);
+			node2 = ft_swap(node2); // добавить обработку случая, всего одна нода есть
+		}
+		else if (ft_strncmp(str, "rra", 3))
+			*node1 = ft_reverse(*node1);
+		else if (ft_strncmp(str, "rrb", 3))
+			node2 = ft_reverse(node2);
+		else if (ft_strncmp(str, "rrr", 3))
+		{
+			*node1 = ft_reverse(*node1);
+			node2 = ft_reverse(node2);
+		}
+		else if (ft_strncmp(str, "ra", 2))
+			*node1 = ft_rotate(*node1);
+		else if (ft_strncmp(str, "rb", 2))
+			node2 = ft_rotate(node2);
+		else if (ft_strncmp(str, "rr", 2))
+		{
+			*node1 = ft_rotate(*node1);
+			node2 = ft_rotate(node2);
+		}
 	}
 }
 
@@ -52,12 +79,15 @@ int 	check_output(t_push **node1)
 			break ;
 		str = increase_buffer(&str);
 	}
-	parse_instructions(&out, str);
+//	parse_instructions(&out, str);
+	return (1);
 }
 
 int 	main(int argc, char **argv)
 {
 	int result;
+	char *str;
+	t_push *node;
 
 	if (argc == 1)
 	{
