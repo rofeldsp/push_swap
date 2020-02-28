@@ -66,7 +66,6 @@ void	move_node_back(t_push **node1, t_push **node2, t_push **head,
 
 void	sort_stacks(t_push **node1, t_push **node2, t_output **out)
 {
-	int 	i;
 	t_push	*head2;
 	int 	move_nbr;
 
