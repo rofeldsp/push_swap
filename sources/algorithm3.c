@@ -61,14 +61,21 @@ t_push	*sort_first_stack(t_push *node, int nbr, t_output **out)
 	return (node);
 }
 
+/*
+** Calculate a number of steps to rotate stack1 to push node fro, stack2.
+ */
+
 int		len_to_push(t_push *node, int nbr)
 {
-	while (nbr > node->nbr)
+	while ((!(nbr > node->nbr) && node->next != NULL) &&
+				(!(nbr < node->next->nbr) && node->next != NULL))
 		node = node->next;
-	if (len_to_start(node) > len_to_end(node))
-		return (len_to_start(node));
+	if (node->next == NULL)
+		return (0);
+	if (len_to_start(node->next) > len_to_end(node->next))
+		return (len_to_start(node->next));
 	else
-		return (len_to_end(node));
+		return (len_to_end(node->next));
 }
 
 /*

@@ -134,4 +134,3 @@ void	ft_solve(t_push *node1)
 	out = combine_rotations(&out);
 	display_output(out);
 }
-
