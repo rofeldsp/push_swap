@@ -23,35 +23,7 @@ t_push *rotate_to_push(t_push *node, t_push *head, t_output **out)
 	return (node);
 }
 
-int		what_to_move(t_push *node1, t_push *node2)
-{
-	int 	ticker;
-	int 	len2;
-	int 	len1;
-	int 	buf;
-	int 	num;
-
-	buf = -1;
-	ticker = 1;
-	num = 0;
-	while (ticker != 0)
-	{
-		len1 = len_to_push(node1, node2->nbr);
-		len2 = len_to_start(node2) > len_to_end(node2) ? len_to_end(node2) :
-				len_to_start(node2);
-		num = (len2 + len1 + 1 < buf || buf == -1) ? node2->nbr : num;
-		buf = (buf == -1) ? (len2 + len1 + 1) : buf;
-		buf = (len2 + len1 + 1 < buf) ? (len2 + len1 + 1) : buf;
-		ticker = (node2->next == NULL) ? 0 : 1;
-		node2 = (ticker == 0) ? node2 : node2->next;
-	}
-	return (num);
-// посчитать здесь в цикле, сколько уйдет для каждой фигуры шагов, чтобы ее
-// переместить обратно. Выбрать, что перемещаем, и вернуть указатель на этот
-// элемент списка.
-}
-
-t_push	*what_to_push(t_push *node, t_output **out)
+t_push *what_to_push(t_push *node, t_output **out)
 {
 	int		len_to_edge;
 	int		len_buf;

@@ -117,7 +117,5 @@ t_push 		*rotate_to_push(t_push *node, t_push *head, t_output **out);
 t_output 	*delete_node(t_output **out);
 t_output 	*put_rr(t_output **out);
 t_output 	*put_rrr(t_output **out);
-int			len_to_push(t_push *node, int nbr);
-int			what_to_move(t_push *node1, t_push *node2);
 
 #endif
