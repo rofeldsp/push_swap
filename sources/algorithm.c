@@ -29,7 +29,10 @@ int 	check_sequence(t_push *node)
 		node = node->next;
 	}
 	if (node->nbr > num)
+	{
+		num = node->nbr;
 		i++;
+	}
 	return (i);
 }
 
