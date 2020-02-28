@@ -41,7 +41,8 @@ int 	find_smallest_nbr(t_push *node)
 }
 
 /*
-** Sort stack1 so the head->nbr will be bigger than node-nbr from stack2.
+** Sort stack1 so the head->nbr will be bigger than node-nbr from stack2. This
+ * function is either used to rotate stack1, so it will be in ascending order.
  */
 
 t_push	*sort_first_stack(t_push *node, int nbr, t_output **out)
@@ -59,23 +60,6 @@ t_push	*sort_first_stack(t_push *node, int nbr, t_output **out)
 			head = ft_rotate_out(head, out, 1);
 	node = head;
 	return (node);
-}
-
-/*
-** Calculate a number of steps to rotate stack1 to push node fro, stack2.
- */
-
-int		len_to_push(t_push *node, int nbr)
-{
-	while ((!(nbr > node->nbr) && node->next != NULL) &&
-				(!(nbr < node->next->nbr) && node->next != NULL))
-		node = node->next;
-	if (node->next == NULL)
-		return (0);
-	if (len_to_start(node->next) > len_to_end(node->next))
-		return (len_to_start(node->next));
-	else
-		return (len_to_end(node->next));
 }
 
 /*
