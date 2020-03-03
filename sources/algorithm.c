@@ -66,32 +66,33 @@ int 	buf_sequence(t_push *node1)
 ** Mark all nodes which are out of order and should be pushed to stack2.
  */
 
-t_push	*leave_marks(t_push *node1, int buf)
+void	leave_marks(t_push **node1, int buf)
 {
 	int num;
 	int buf2;
-	t_push	*node_buf;
+	t_push	*head;
 
 	buf2 = buf;
 	while (buf-- != 0)
-		node1 = ft_rotate(node1);
-	node_buf = node1;
-	num = node_buf->nbr;
-	node_buf = node_buf->next;
-	while (node_buf != NULL)
+		*node1 = ft_rotate(*node1);
+	head = *node1;
+	num = (*node1)->nbr;
+	(*node1)->marker = 0;
+	(*node1) = (*node1)->next;
+	while (*node1 != NULL)
 	{
-		if (node_buf->nbr > num)
+		if ((*node1)->nbr > num)
 		{
-			num = node_buf->nbr;
-			node_buf->marker = 0;
+			num = (*node1)->nbr;
+			(*node1)->marker = 0;
 		}
 		else
-			node_buf->marker = 1;
-		node_buf = node_buf->next;
+			(*node1)->marker = 1;
+		*node1 = (*node1)->next;
 	}
+	*node1 = head;
 	while (buf2-- != 0)
-		node1 = ft_reverse(node1);
-	return (node1);
+		*node1 = ft_reverse(*node1);
 }
 
 /*
@@ -127,7 +128,7 @@ void	ft_solve(t_push **node1)
 
 	out = allocate_output_struct(sizeof(t_output));
 	buf = buf_sequence(*node1);
-	*node1 = leave_marks(*node1, buf); // после этого этапа пропадает указатель на prev - пофиксить
+	leave_marks(node1, buf); // после этого этапа пропадает указатель на prev - пофиксить
 	node2 = push_to_scnd_stack(node1, &out);
 	sort_stacks(node1, &node2, &out);
 	while (out->prev != NULL)

@@ -63,6 +63,8 @@ void		add_list(t_push *node, char **str)
 	node->next = node2;
 	node2->prev = node;
 	j = 0;
+	if (str[0][0] == '-')
+		j++;
 	while (ft_isdigit(str[0][j]))
 		j++;
 	if (j == (int)ft_strlen(str[0]))
