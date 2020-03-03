@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   free_node.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rofeldsp <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/19 13:24:07 by rofeldsp          #+#    #+#             */
-/*   Updated: 2020/02/19 13:24:10 by rofeldsp         ###   ########.fr       */
+/*   Created: 2020/03/03 16:55:03 by rofeldsp          #+#    #+#             */
+/*   Updated: 2020/03/03 16:55:04 by rofeldsp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int main(int argc, char **argv)
+void free_node(t_push *node)
 {
-	char *str;
-	t_push *node;
+	t_push *tmp;
 
-	if (argc == 1)
+	while (node != NULL)
 	{
-		print_error(ERR_ARG);
-		exit(33); // почему без этого не компилится?
+		tmp = node;
+		node = node->next;
+		free(tmp);
 	}
-	else
-		str = parse_string(argc, argv);
-	node = parse_stack(str);
-	ft_solve(&node);
-//	free_node(node);
-	free (str);
-	return (0);
+}
+
+void free_output(t_output *node)
+{
+	t_output *tmp;
+
+	while (node != NULL)
+	{
+		tmp = node;
+		node = node->next;
+		free(tmp);
+	}
 }

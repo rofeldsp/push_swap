@@ -33,55 +33,65 @@ void	parse_instructions(char *str, t_push **node1)
 	node2->nbr = EMPTY_NODE;
 	while(str[i])
 	{
-		if (ft_strncmp(str, "pa", 2))
+		if (!(ft_strncmp(str + i, "pa", 2)))
 			ft_push(&node2, node1);
-		else if (ft_strncmp(str, "pb", 2))
+		else if (!(ft_strncmp(str + i, "pb", 2)))
 			ft_push(node1, &node2);
-		else if (ft_strncmp(str, "sa", 2))
+		else if (!(ft_strncmp(str + i, "sa", 2)))
 			*node1 = ft_swap(*node1);
-		else if (ft_strncmp(str, "sb", 2))
+		else if (!(ft_strncmp(str + i, "sb", 2)))
 			node2 = ft_swap(node2);
-		else if (ft_strncmp(str, "ss", 2))
+		else if (!(ft_strncmp(str + i, "ss", 2)))
 		{
 			*node1 = ft_swap(*node1);
 			node2 = ft_swap(node2);
 		}
-		else if (ft_strncmp(str, "rra", 3))
+		else if (!(ft_strncmp(str + i, "rra", 3)))
 			*node1 = ft_reverse(*node1);
-		else if (ft_strncmp(str, "rrb", 3))
+		else if (!(ft_strncmp(str + i, "rrb", 3)))
 			node2 = ft_reverse(node2);
-		else if (ft_strncmp(str, "rrr", 3))
+		else if (!(ft_strncmp(str + i, "rrr", 3)))
 		{
 			*node1 = ft_reverse(*node1);
 			node2 = ft_reverse(node2);
 		}
-		else if (ft_strncmp(str, "ra", 2))
+		else if (!(ft_strncmp(str + i, "ra", 2)))
 			*node1 = ft_rotate(*node1);
-		else if (ft_strncmp(str, "rb", 2))
+		else if (!(ft_strncmp(str + i, "rb", 2)))
 			node2 = ft_rotate(node2);
-		else if (ft_strncmp(str, "rr", 2))
+		else if (!(ft_strncmp(str + i, "rr", 2)))
 		{
 			*node1 = ft_rotate(*node1);
 			node2 = ft_rotate(node2);
 		}
+		if (!(ft_strncmp(str + i, "rrr", 3)) || !(ft_strncmp(str + i, "rra", 3)) ||
+			!(ft_strncmp(str + i, "rrb", 3)))
+			i += 4;
+		else
+			i += 3;
 	}
 }
 
 int 	check_output(t_push **node1)
 {
 	int ret;
+	int buf;
 	char *str;
 
+	buf = 0;
 	if (!(str = ft_strnew(BUFFER + 1)))
 		print_error(ERR_MALLOC);
 	while (1)
 	{
-		if ((ret = read(1, str, BUFFER)) == 0)
+		if ((ret = (read(0, str + buf, BUFFER))) == 0)
 			break ;
 		str = increase_buffer(&str);
+		buf += ret;
 	}
-//	parse_instructions(&out, str);
-	return (1);
+	parse_instructions(str, node1);
+	if (check_sequence(*node1) == stack_length(*node1) - 1)
+		return (1);
+	return (0);
 }
 
 int 	main(int argc, char **argv)
@@ -99,4 +109,10 @@ int 	main(int argc, char **argv)
 		str = parse_string(argc, argv);
 	node = parse_stack(str);
 	result = check_output(&node);
+	if (result == 1)
+		write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
+	free_node(node);
+	return (0);
 }

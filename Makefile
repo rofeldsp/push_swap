@@ -38,6 +38,7 @@ SOURCE_FILES = push_swap.c \
             algorithm4.c \
             algorithm5.c \
             algorithm6.c \
+            free_node.c \
             allocate_struct.c \
             instructions.c \
             instructions_output.c
@@ -46,6 +47,7 @@ SOURCE_FILES_CHECKER = checker.c \
             parse_string.c \
             print_error.c \
             parse_stack.c \
+            free_node.c \
             algorithm.c \
             algorithm2.c \
             algorithm3.c \
