@@ -17,9 +17,8 @@
 ** Error macroses
  */
 
-# define ERR_ARG 	"No arguments found\n"
 # define ERR_MALLOC "Failed to allocate the memory\n"
-# define STD_ERR	"Error: input should consist from digits only"
+# define STD_ERR	"Error"
 
 /*
 ** Macroses
@@ -28,6 +27,8 @@
 # define DEBUG	2
 # define EMPTY_NODE 4294967296
 # define BUFFER		100
+# define INTMAX 2147483647
+# define INTMIN	-2147483648
 
 # define PUSH_A 1
 # define PUSH_B 2
@@ -80,7 +81,7 @@ typedef struct		s_output
  */
 
 char		*parse_string(int argc, char **argv);
-void		print_error(char *str);
+void		print_error(void);
 int			main(int argc, char **argv);
 t_push		*parse_stack(char *str);
 void		add_list(t_push *node, char **str);

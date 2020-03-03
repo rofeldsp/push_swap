@@ -17,7 +17,7 @@ char 	*increase_buffer(char **str)
 	char *dest;
 
 	if (!(dest = ft_strnew(ft_strlen(*str) + BUFFER + 1)))
-		print_error(ERR_MALLOC);
+		print_error();
 	dest = ft_strcpy(dest, *str);
 	free(*str);
 	return(dest);
@@ -64,8 +64,8 @@ void	parse_instructions(char *str, t_push **node1)
 			*node1 = ft_rotate(*node1);
 			node2 = ft_rotate(node2);
 		}
-		if (!(ft_strncmp(str + i, "rrr", 3)) || !(ft_strncmp(str + i, "rra", 3)) ||
-			!(ft_strncmp(str + i, "rrb", 3)))
+		if (!(ft_strncmp(str + i, "rrr", 3)) || !(ft_strncmp(str + i, "rra", 3))
+				|| !(ft_strncmp(str + i, "rrb", 3)))
 			i += 4;
 		else
 			i += 3;
@@ -80,7 +80,7 @@ int 	check_output(t_push **node1)
 
 	buf = 0;
 	if (!(str = ft_strnew(BUFFER + 1)))
-		print_error(ERR_MALLOC);
+		print_error();
 	while (1)
 	{
 		if ((ret = (read(0, str + buf, BUFFER))) == 0)
@@ -102,7 +102,7 @@ int 	main(int argc, char **argv)
 
 	if (argc == 1)
 	{
-		print_error(ERR_ARG);
+		print_error();
 		exit(33); // почему без этого не компилится?
 	}
 	else

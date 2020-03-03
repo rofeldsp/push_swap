@@ -28,13 +28,35 @@ int 		stack_length(t_push *node)
 	return(i);
 }
 
+void		check_for_errors(t_push **node)
+{
+	t_push *head;
+	t_push *head2;
+
+	head2 = *node;
+	if (((*node)->nbr) > INTMAX || (*node)->nbr < INTMIN)
+		print_error();
+	while (*node != NULL)
+	{
+		head = head2;
+		while (head != NULL)
+		{
+			if (head->nbr == node->nbr)
+				print_error();
+			head = head->next;
+		}
+		*node = (*node)->next;
+	}
+	*node = head2;
+}
+
 void		add_list(t_push *node, char **str)
 {
 	int 	j;
 	t_push	*node2;
 
 	if (!(node2 = malloc(sizeof(t_push))))
-		print_error(ERR_MALLOC);
+		print_error();
 	node2->debug_opt = node->debug_opt;
 	node2->next = NULL;
 	node2->marker = -1;
@@ -59,7 +81,7 @@ t_push		*parse_stack(char *str)
 	i = 0;
 	j = 0;
 	if (!(node = malloc(sizeof(t_push))))
-		print_error(ERR_MALLOC);
+		print_error();
 	str2 = ft_strsplit(str, ' ');
 	if (ft_strequ(str2[0], "-v"))
 	{
@@ -73,7 +95,7 @@ t_push		*parse_stack(char *str)
 	if (j == (int)ft_strlen(str2[i]))
 		node->nbr = ft_atoll(str2[i++]);
 	else
-		print_error(STD_ERR);
+		print_error();
 	node->next = NULL;
 	node->prev = NULL;
 	node->marker = -1;
@@ -83,5 +105,6 @@ t_push		*parse_stack(char *str)
 	while (str2[i])
 		free(str2[i++]);
 	free(str2);
+	check_for_errors(&node);
 	return(node);
 }

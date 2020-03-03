@@ -17,7 +17,7 @@ t_push		*allocate_struct(size_t size)
 	t_push *node;
 
 	if (!(node = malloc(size)))
-		print_error(ERR_MALLOC);
+		print_error();
 	node->next = NULL;
 	node->prev = NULL;
 	node->debug_opt = 0;
@@ -30,7 +30,7 @@ t_output	*allocate_output_struct(size_t size)
 	t_output *node;
 
 	if (!(node = malloc(size)))
-		print_error(ERR_MALLOC);
+		print_error();
 	node->next = NULL;
 	node->prev = NULL;
 	node->oper = 0;

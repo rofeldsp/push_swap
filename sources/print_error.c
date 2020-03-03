@@ -12,8 +12,8 @@
 
 #include "push_swap.h"
 
-void	print_error(char *str)
+void	print_error(void)
 {
-	ft_putstr(str);
+	write(2, "Error\n", 6);
 	exit(33);
 }
