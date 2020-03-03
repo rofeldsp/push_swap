@@ -89,11 +89,11 @@ void 		ft_push(t_push **node1, t_push **node2);
 t_push 		*ft_rotate(t_push *node);
 void 		free_node(t_push *node);
 t_push		*ft_reverse(t_push *node);
-void		ft_solve(t_push *node1);
+void		ft_solve(t_push **node1);
 int 		stack_length(t_push *node);
 t_push		*allocate_struct(size_t size);
 t_push 		*push_to_scnd_stack(t_push **node1, t_output **out);
-void		leave_marks(t_push *node1, int buf);
+t_push		*leave_marks(t_push *node1, int buf);
 void		move_node_back(t_push **node1, t_push **node2, t_push **head,
 						   t_output **out);
 int 		buf_sequence(t_push *node1);
@@ -122,5 +122,6 @@ t_output 	*put_rr(t_output **out);
 t_output 	*put_rrr(t_output **out);
 int			len_to_push(t_push *node, int nbr);
 int			what_to_move(t_push *node1, t_push *node2);
+void		free_output(t_output *node);
 
 #endif

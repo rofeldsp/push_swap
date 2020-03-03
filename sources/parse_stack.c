@@ -37,6 +37,7 @@ void		add_list(t_push *node, char **str)
 		print_error(ERR_MALLOC);
 	node2->debug_opt = node->debug_opt;
 	node2->next = NULL;
+	node2->marker = -1;
 	node->next = node2;
 	node2->prev = node;
 	j = 0;
@@ -75,6 +76,7 @@ t_push		*parse_stack(char *str)
 		print_error(STD_ERR);
 	node->next = NULL;
 	node->prev = NULL;
+	node->marker = -1;
 	if (*str2 + 1)
 		add_list(node, str2 + 1);
 	i = 0;

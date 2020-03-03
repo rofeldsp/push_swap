@@ -66,7 +66,7 @@ int 	buf_sequence(t_push *node1)
 ** Mark all nodes which are out of order and should be pushed to stack2.
  */
 
-void	leave_marks(t_push *node1, int buf)
+t_push	*leave_marks(t_push *node1, int buf)
 {
 	int num;
 	int buf2;
@@ -91,6 +91,7 @@ void	leave_marks(t_push *node1, int buf)
 	}
 	while (buf2-- != 0)
 		node1 = ft_reverse(node1);
+	return (node1);
 }
 
 /*
@@ -118,19 +119,21 @@ t_push 	*push_to_scnd_stack(t_push **node1, t_output **out)
  * Function responsible for finding solution
  */
 
-void	ft_solve(t_push *node1)
+void	ft_solve(t_push **node1)
 {
 	int 		buf;
 	t_push 		*node2;
 	t_output	*out;
 
 	out = allocate_output_struct(sizeof(t_output));
-	buf = buf_sequence(node1);
-	leave_marks(node1, buf); // после этого этапа пропадает указатель на prev - пофиксить
-	node2 = push_to_scnd_stack(&node1, &out);
-	sort_stacks(&node1, &node2, &out);
+	buf = buf_sequence(*node1);
+	*node1 = leave_marks(*node1, buf); // после этого этапа пропадает указатель на prev - пофиксить
+	node2 = push_to_scnd_stack(node1, &out);
+	sort_stacks(node1, &node2, &out);
 	while (out->prev != NULL)
 		out = out->prev;
 	out = combine_rotations(&out);
 	display_output(out);
+	free_output(out);
+	free_node(*node1);
 }

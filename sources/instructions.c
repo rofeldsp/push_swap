@@ -16,6 +16,8 @@ t_push		*ft_swap(t_push *node)
 {
 	t_push *tmp;
 
+	if (node->next == NULL)
+		return (node);
 	tmp = node->next;
 	node->next = node->next->next;
 	tmp->next = node;
@@ -32,6 +34,7 @@ void		ft_push(t_push **node1, t_push **node2)
 	tmp = (*node1)->next;
 	if ((*node2)->nbr == EMPTY_NODE)
 	{
+		free(*node2);
 		*node2 = *node1;
 		(*node2)->next = NULL;
 		(*node2)->prev = NULL;
@@ -72,6 +75,8 @@ t_push		*ft_rotate(t_push *node)
 	t_push	*head;
 
 //	tmp = malloc(sizeof(t_push));
+	if (node->next == NULL)
+		return (node);
 	head = node->next;
 	tmp = node->next;
 	while (tmp->next != NULL)
@@ -87,19 +92,18 @@ t_push		*ft_reverse(t_push *node)
 {
 	t_push	*tmp;
 
+	if (node->next == NULL)
+		return (node);
 	while (node->next != NULL)
 		node = node->next;
 	tmp = node;
-	if (node->prev != NULL)
-	{
+	node = node->prev;
+	node->next = NULL;
+	while (node->prev != NULL)
 		node = node->prev;
-		node->next = NULL;
-		while (node->prev != NULL)
-			node = node->prev;
-		node->prev = tmp;
-		node->prev->next = node;
-		node = node->prev;
-		node->prev =  NULL;
-	}
+	node->prev = tmp;
+	node->prev->next = node;
+	node = node->prev;
+	node->prev =  NULL;
 	return (node);
 }

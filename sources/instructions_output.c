@@ -30,6 +30,8 @@ t_push		*ft_swap_out(t_push *node, t_output **out, int stack_n)
 {
 	t_push *tmp;
 
+	if (node->next == NULL)
+		return (node);
 	*out = addlist_to_output(out);
 	(*out)->oper |= (stack_n == 1 ? SWAP_A : SWAP_B);
 	tmp = node->next;
@@ -49,6 +51,7 @@ void		ft_push_out(t_push **node1, t_push **node2, t_output **out, int s_n)
 	tmp = (*node1)->next;
 	if ((*node2)->nbr == EMPTY_NODE)
 	{
+		free(*node2);
 		*node2 = *node1;
 		(*node2)->next = NULL;
 		(*node2)->prev = NULL;
@@ -88,6 +91,8 @@ t_push		*ft_rotate_out(t_push *node, t_output **out, int stack_n)
 	t_push	*tmp;
 	t_push	*head;
 
+	if (node->next == NULL)
+		return (node);
 	*out = addlist_to_output(out);
 	(*out)->oper |= (stack_n == 1 ? ROT_A : ROT_B);
 	head = node->next;
@@ -105,21 +110,20 @@ t_push		*ft_reverse_out(t_push *node, t_output **out, int stack_n)
 {
 	t_push	*tmp;
 
+	if (node->next == NULL)
+		return (node);
 	*out = addlist_to_output(out);
 	(*out)->oper |= (stack_n == 1 ? RROT_A : RROT_B);
 	while (node->next != NULL)
 		node = node->next;
 	tmp = node;
-	if (node->prev != NULL)
-	{
+	node = node->prev;
+	node->next = NULL;
+	while (node->prev != NULL)
 		node = node->prev;
-		node->next = NULL;
-		while (node->prev != NULL)
-			node = node->prev;
-		node->prev = tmp;
-		node->prev->next = node;
-		node = node->prev;
-		node->prev =  NULL;
-	}
+	node->prev = tmp;
+	node->prev->next = node;
+	node = node->prev;
+	node->prev =  NULL;
 	return (node);
 }

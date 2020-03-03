@@ -22,7 +22,18 @@ void free_node(t_push *node)
 		node = node->next;
 		free(tmp);
 	}
+}
 
+void free_output(t_output *node)
+{
+	t_output *tmp;
+
+	while (node != NULL)
+	{
+		tmp = node;
+		node = node->next;
+		free(tmp);
+	}
 }
 
 int main(int argc, char **argv)
@@ -38,8 +49,8 @@ int main(int argc, char **argv)
 	else
 		str = parse_string(argc, argv);
 	node = parse_stack(str);
-	ft_solve(node);
-	free_node(node);
+	ft_solve(&node);
+//	free_node(node);
 	free (str);
 	return (0);
 }
