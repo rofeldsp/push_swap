@@ -64,6 +64,8 @@ void	parse_instructions(char *str, t_push **node1)
 			*node1 = ft_rotate(*node1);
 			node2 = ft_rotate(node2);
 		}
+		else
+			print_error();
 		if (!(ft_strncmp(str + i, "rrr", 3)) || !(ft_strncmp(str + i, "rra", 3))
 				|| !(ft_strncmp(str + i, "rrb", 3)))
 			i += 4;
@@ -89,6 +91,8 @@ int 	check_output(t_push **node1)
 		buf += ret;
 	}
 	parse_instructions(str, node1);
+	if (*node1 == NULL)
+		print_error();
 	if (check_sequence(*node1) == stack_length(*node1) - 1)
 		return (1);
 	return (0);

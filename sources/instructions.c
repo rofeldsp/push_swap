@@ -31,6 +31,8 @@ void		ft_push(t_push **node1, t_push **node2)
 {
 	t_push *tmp;
 
+	if (*node1 == NULL || (*node1)->nbr == EMPTY_NODE)
+		print_error();
 	tmp = (*node1)->next;
 	if ((*node2)->nbr == EMPTY_NODE)
 	{

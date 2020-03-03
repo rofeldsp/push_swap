@@ -34,14 +34,14 @@ void		check_for_errors(t_push **node)
 	t_push *head2;
 
 	head2 = *node;
-	if (((*node)->nbr) > INTMAX || (*node)->nbr < INTMIN)
-		print_error();
 	while (*node != NULL)
 	{
+		if (((*node)->nbr) > INTMAX || (*node)->nbr < INTMIN)
+			print_error();
 		head = head2;
 		while (head != NULL)
 		{
-			if (head->nbr == node->nbr)
+			if ((head->nbr == (*node)->nbr) && head != *node)
 				print_error();
 			head = head->next;
 		}

@@ -32,6 +32,5 @@ char		*parse_string(int argc, char **argv)
 			print_error();
 		free (tmp);
 	}
-//	ft_putstr(str);
 	return (str);
 }

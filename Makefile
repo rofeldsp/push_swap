@@ -85,6 +85,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f $(NAME2)
 	@make fclean -C $(LIBFT)
 
 re: fclean all

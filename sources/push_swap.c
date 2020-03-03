@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 
 	if (argc == 1)
 	{
-		print_error(ERR_ARG);
+		print_error();
 		exit(33); // почему без этого не компилится?
 	}
 	else
