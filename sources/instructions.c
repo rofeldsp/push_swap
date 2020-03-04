@@ -77,7 +77,7 @@ t_push		*ft_rotate(t_push *node)
 	t_push	*head;
 
 //	tmp = malloc(sizeof(t_push));
-	if (node->next == NULL)
+	if (node == NULL || node->next == NULL)
 		return (node);
 	head = node->next;
 	tmp = node->next;
@@ -94,7 +94,7 @@ t_push		*ft_reverse(t_push *node)
 {
 	t_push	*tmp;
 
-	if (node->next == NULL)
+	if (node == NULL || node->next == NULL)
 		return (node);
 	while (node->next != NULL)
 		node = node->next;

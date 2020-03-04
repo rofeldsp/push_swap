@@ -79,7 +79,7 @@ void		add_list(t_push *node, char **str)
 void 		check_for_overload(char *str)
 {
 	int j;
-	int64_t nbr;
+//	int64_t nbr;
 
 	j = 0;
 	if (str[j] == '-' && str[j + 1])

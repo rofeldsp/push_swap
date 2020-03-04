@@ -79,7 +79,9 @@ int 	check_output(t_push **node1)
 	int ret;
 	int buf;
 	char *str;
+	int 	stack_len;
 
+	stack_len = stack_length(*node1);
 	buf = 0;
 	if (!(str = ft_strnew(BUFFER + 1)))
 		print_error();
@@ -93,7 +95,8 @@ int 	check_output(t_push **node1)
 	parse_instructions(str, node1);
 	if (*node1 == NULL)
 		print_error();
-	if (check_sequence(*node1) == stack_length(*node1) - 1)
+	if (check_sequence(*node1) == stack_length(*node1) && stack_length(*node1)
+																== stack_len)
 		return (1);
 	return (0);
 }
