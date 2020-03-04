@@ -52,7 +52,7 @@ void		check_for_errors(t_push **node)
 
 void		add_list(t_push *node, char **str)
 {
-	int 	j;
+//	int 	j;
 	t_push	*node2;
 
 	if (!(node2 = malloc(sizeof(t_push))))
@@ -62,26 +62,51 @@ void		add_list(t_push *node, char **str)
 	node2->marker = -1;
 	node->next = node2;
 	node2->prev = node;
-	j = 0;
-	if (str[0][0] == '-')
-		j++;
-	while (ft_isdigit(str[0][j]))
-		j++;
-	if (j == (int)ft_strlen(str[0]))
+//	j = 0;
+//	if (str[0][0] == '-' && str[0][1])
+//		j++;
+//	while (ft_isdigit(str[0][j]))
+//		j++;
+	check_for_overload(*str);
+//	if (j == (int)ft_strlen(str[0]))
 		node2->nbr = ft_atoll(str[0]);
+//	else
+//		print_error();
 	if (*(str + 1))
 		add_list(node2, str + 1);
+}
+
+void 		check_for_overload(char *str)
+{
+	int j;
+	int64_t nbr;
+
+	j = 0;
+	if (str[j] == '-' && str[j + 1])
+		j++;
+	while (ft_isdigit(str[j]))
+		j++;
+	if (j != (int)ft_strlen(str))
+		print_error();
+	if (str[0] == '-')
+	{
+		if (ft_atoll(str) > 0)
+			print_error();
+	}
+	else
+		if (ft_atoll(str) < 0)
+			print_error();
 }
 
 t_push		*parse_stack(char *str)
 {
 	int 	i;
-	int		j;
+//	int		j;
 	t_push	*node;
 	char	**str2;
 
 	i = 0;
-	j = 0;
+//	j = 0;
 	if (!(node = malloc(sizeof(t_push))))
 		print_error();
 	str2 = ft_strsplit(str, ' ');
@@ -90,14 +115,15 @@ t_push		*parse_stack(char *str)
 		node->debug_opt |= DEBUG;
 		i++;
 	}
-	if (str2[i][j] == '-')
-		j++;
-	while (ft_isdigit(str2[i][j]))
-		j++;
-	if (j == (int)ft_strlen(str2[i]))
+//	if (str2[i][j] == '-' && str2[i][j + 1])
+//		j++;
+//	while (ft_isdigit(str2[i][j]))
+//		j++;
+	check_for_overload(str2[i]);
+//	if (j == (int)ft_strlen(str2[i]))
 		node->nbr = ft_atoll(str2[i++]);
-	else
-		print_error();
+//	else
+//		print_error();
 	node->next = NULL;
 	node->prev = NULL;
 	node->marker = -1;

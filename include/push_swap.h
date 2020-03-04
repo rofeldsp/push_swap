@@ -124,5 +124,6 @@ t_output 	*put_rrr(t_output **out);
 int			len_to_push(t_push *node, int nbr);
 int			what_to_move(t_push *node1, t_push *node2);
 void		free_output(t_output *node);
+void 		check_for_overload(char *str);
 
 #endif
