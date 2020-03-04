@@ -15,12 +15,12 @@
 char		*parse_string(int argc, char **argv)
 {
 	int		i;
-	int		j;
+//	int		j;
 	char	*str;
 	char 	*tmp;
 
 	i = 1;
-	j = 0; // добавить про флаг -v
+//	j = 0; // добавить про флаг -v
 	if (!(str = ft_strdup(argv[i++])))
 		print_error();
 	while (i < argc)

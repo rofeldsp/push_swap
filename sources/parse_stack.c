@@ -110,9 +110,14 @@ t_push		*parse_stack(char *str)
 	if (!(node = malloc(sizeof(t_push))))
 		print_error();
 	str2 = ft_strsplit(str, ' ');
-	if (ft_strequ(str2[0], "-v"))
+	if (ft_strequ(str2[i], "-v"))
 	{
 		node->debug_opt |= DEBUG;
+		i++;
+	}
+	if (ft_strequ(str2[i], "-c"))
+	{
+		node->debug_opt |= COLOR;
 		i++;
 	}
 //	if (str2[i][j] == '-' && str2[i][j + 1])

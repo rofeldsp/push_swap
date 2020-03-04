@@ -25,6 +25,7 @@
  */
 
 # define DEBUG	2
+# define COLOR	4
 # define EMPTY_NODE 4294967296
 # define BUFFER		100
 # define INTMAX 2147483647
@@ -125,5 +126,6 @@ int			len_to_push(t_push *node, int nbr);
 int			what_to_move(t_push *node1, t_push *node2);
 void		free_output(t_output *node);
 void 		check_for_overload(char *str);
+void		display_stacks(t_push *node1, t_push *node2, int stack_n);
 
 #endif

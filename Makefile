@@ -39,6 +39,7 @@ SOURCE_FILES = push_swap.c \
             algorithm5.c \
             algorithm6.c \
             free_node.c \
+            display_stacks.c \
             allocate_struct.c \
             instructions.c \
             instructions_output.c
