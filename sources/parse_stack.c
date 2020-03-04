@@ -101,7 +101,7 @@ t_push		*parse_stack(char *str)
 	node->next = NULL;
 	node->prev = NULL;
 	node->marker = -1;
-	if (*str2 + 1)
+	if (*(str2 + 1))
 		add_list(node, str2 + 1);
 	i = 0;
 	while (str2[i])
