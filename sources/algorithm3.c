@@ -40,6 +40,20 @@ int 	find_smallest_nbr(t_push *node)
 	return (i);
 }
 
+int 	find_largest_nbr(t_push *node)
+{
+	int i;
+
+	i = node->nbr;
+	while (node != NULL)
+	{
+		if (node->nbr > i)
+			i = node->nbr;
+		node = node->next;
+	}
+	return (i);
+}
+
 /*
 ** Sort stack1 so the head->nbr will be bigger than node-nbr from stack2.
  */
@@ -49,10 +63,22 @@ t_push	*sort_first_stack(t_push *node, t_push *node2, int nbr, t_output **out)
 	t_push *head;
 
 	head = node;
-	while (node->next != NULL && (!(nbr > node->nbr) ||
-		   !(nbr < node->next->nbr)))
-		node = node->next;
+	if (nbr > find_largest_nbr(node) || nbr < find_smallest_nbr(node))
+	{
+		while (node->nbr != find_smallest_nbr(node))
+			node = node->next;
+	}
+	else
+	{
+		while (node->next != NULL && (!(nbr > node->nbr) ||
+									  !(nbr < node->next->nbr)))
+			node = node->next;
+		if (node->next == NULL)
+			return(head);
+		else
+			node = node->next;
 
+	}
 //	while (nbr > node->nbr)
 //		node = node->next;
 	if (len_to_start(node) > len_to_end(node))
@@ -71,15 +97,30 @@ t_push	*sort_first_stack(t_push *node, t_push *node2, int nbr, t_output **out)
 
 int		len_to_push(t_push *node, int nbr)
 {
-	while (node->next != NULL && (!(nbr > node->nbr) ||
-								  !(nbr < node->next->nbr)))
-		node = node->next;
-	if (node->next == NULL)
-		return (0);
-	if (len_to_start(node->next) > len_to_end(node->next))
-		return (len_to_start(node->next));
+	if (nbr > find_largest_nbr(node) || nbr < find_smallest_nbr(node))
+	{
+		while (node->nbr != find_smallest_nbr(node))
+			node = node->next;
+	}
 	else
-		return (len_to_end(node->next));
+	{
+		while (node->next != NULL && (!(nbr > node->nbr) ||
+									  !(nbr < node->next->nbr)))
+			node = node->next;
+		if (node->next == NULL)
+			return (0);
+		else
+			node = node->next;
+	}
+//	while (node->next != NULL && (!(nbr > node->nbr) ||
+//								  !(nbr < node->next->nbr)))
+//		node = node->next;
+//	if (node->next == NULL)
+//		return (0);
+	if (len_to_start(node) > len_to_end(node))
+		return (len_to_start(node));
+	else
+		return (len_to_end(node));
 }
 
 /*
