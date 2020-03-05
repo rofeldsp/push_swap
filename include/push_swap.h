@@ -123,7 +123,7 @@ t_output 	*delete_node(t_output **out);
 t_output 	*put_rr(t_output **out);
 t_output 	*put_rrr(t_output **out);
 int			len_to_push(t_push *node, int nbr);
-int			what_to_move(t_push *node1, t_push *node2);
+int64_t		what_to_move(t_push *node1, t_push *node2);
 void		free_output(t_output *node);
 void 		check_for_overload(char *str);
 void		display_stacks(t_push *node1, t_push *node2, int stack_n);

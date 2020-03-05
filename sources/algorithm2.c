@@ -70,7 +70,7 @@ void	sort_stacks(t_push **node1, t_push **node2, t_output **out)
 	int 	move_nbr;
 
 //	*node1 = rotate_ascending(*node1, out);
-	while (*node2 != NULL)
+	while (*node2 != NULL && (*node2)->nbr != EMPTY_NODE)
 	 {
 //	 	while ((*node2) != NULL)
 //		{

@@ -118,9 +118,9 @@ int		len_to_push(t_push *node, int nbr)
 //	if (node->next == NULL)
 //		return (0);
 	if (len_to_start(node) > len_to_end(node))
-		return (len_to_start(node));
-	else
 		return (len_to_end(node));
+	else
+		return (len_to_start(node));
 }
 
 /*

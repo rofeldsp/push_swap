@@ -23,13 +23,13 @@ t_push *rotate_to_push(t_push *node, t_push *node2, t_push *head, t_output **out
 	return (node);
 }
 
-int		what_to_move(t_push *node1, t_push *node2)
+int64_t		what_to_move(t_push *node1, t_push *node2)
 {
 	int 	ticker;
 	int 	len2;
 	int 	len1;
 	int 	buf;
-	int 	num;
+	int64_t	num;
 
 	buf = -1;
 	ticker = 1;

@@ -50,6 +50,7 @@ SOURCE_FILES_CHECKER = checker.c \
             parse_stack.c \
             free_node.c \
             algorithm.c \
+            display_stacks.c \
             algorithm2.c \
             algorithm3.c \
             algorithm4.c \
@@ -65,7 +66,7 @@ SOURCES_CHECKER = $(addprefix $(DIR_S), $(SOURCE_FILES_CHECKER))
 
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 
-OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
+# OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 
 .PHONY: all clean fclean re
 
@@ -74,7 +75,7 @@ all: $(NAME) $(NAME2)
 $(NAME):
 	@make -C $(LIBFT)
 	@ranlib $(LIBA)
-	@$(CC) $(FLAGS) $(SOURCES) -I $(HEADER) $(LIBA) -o $(NAME)
+	@$(CC) $(FLAGS) $(SOURCES) -I $(HEADER) $(LIBA) $(PRINTF) -o $(NAME)
 
 $(NAME2):
 	@$(CC) $(FLAGS) $(SOURCES_CHECKER) -I $(HEADER) $(LIBA) -o $(NAME2)

@@ -23,10 +23,11 @@ OBJ = ft_lstdelone.o ft_atoll.o ft_lstdel.o ft_lstadd.o ft_lstiter.o ft_lstmap.o
 all: $(NAME)
 
 $(NAME):
+	@make -C $(PRINTF)
+	@cp $(PRINTF)/libftprintf.a ./libft.a
 	@gcc -Wall -Wextra -Werror -c $(INP) -I $(HEAD)
 	@ar rc $(NAME) $(OBJ)
-	@make -C $(PRINTF)
-	@cp $(PRINTF)/libftprintf.a ./$(NAME)
+# 	@ar rc $(NAME) $(PRINTF)/object_files/*.o
 	@ranlib $(NAME)
 
 clean: 
