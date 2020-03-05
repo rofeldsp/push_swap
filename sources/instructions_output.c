@@ -39,7 +39,7 @@ t_push		*ft_swap_out(t_push *node, t_push *node2, t_output **out, int stack_n)
 	tmp->next = node;
 	tmp->prev = NULL;
 	node->prev = tmp;
-	if (node->debug_opt == DEBUG)
+	if (node->debug_opt & DEBUG)
 		display_stacks(tmp, node2, stack_n);
 	return (tmp);
 }
@@ -67,7 +67,8 @@ void		ft_push_out(t_push **node1, t_push **node2, t_output **out, int s_n)
 	*node1 = tmp;
 	if (*node1 != NULL)
 		(*node1)->prev = NULL;
-	if ((*node1)->debug_opt == DEBUG)
+	if ((*node1 != NULL && (*node1)->debug_opt & DEBUG) || (*node2 != NULL
+											&& (*node2)->debug_opt & DEBUG))
 		display_stacks(*node1, *node2, s_n);
 //	t_push *tmp1;
 //
@@ -107,7 +108,7 @@ t_push		*ft_rotate_out(t_push *node, t_push *node2, t_output **out, int stack_n)
 	node->next = NULL;
 	node->prev = tmp;
 	head->prev = NULL;
-	if (node->debug_opt == DEBUG)
+	if (node->debug_opt & DEBUG)
 		display_stacks(head, node2, stack_n);
 	return (head);
 }
@@ -131,7 +132,7 @@ t_push		*ft_reverse_out(t_push *node, t_push *node2, t_output **out, int stack_n
 	node->prev->next = node;
 	node = node->prev;
 	node->prev =  NULL;
-	if (node->debug_opt == DEBUG)
+	if (node->debug_opt & DEBUG) // change to &
 		display_stacks(node, node2, stack_n);
 	return (node);
 }

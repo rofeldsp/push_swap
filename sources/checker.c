@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-char 	*increase_buffer(char **str)
+char 	*ft_increase_buffer(char **str)
 {
 	char *dest;
 
@@ -89,7 +89,7 @@ int 	check_output(t_push **node1)
 	{
 		if ((ret = (read(0, str + buf, BUFFER))) == 0)
 			break ;
-		str = increase_buffer(&str);
+		str = ft_increase_buffer(&str);
 		buf += ret;
 	}
 	parse_instructions(str, node1);
@@ -113,7 +113,7 @@ int 	main(int argc, char **argv)
 		exit(33); // почему без этого не компилится?
 	}
 	else
-		str = parse_string(argc, argv);
+		str = parse_input(argc, argv);
 	node = parse_stack(str);
 	result = check_output(&node);
 	if (result == 1)

@@ -107,11 +107,11 @@ t_push 	*push_to_scnd_stack(t_push **node1, t_output **out)
 	node2->nbr = EMPTY_NODE;
 	while (count_marked_nodes(*node1) > 0)
 	{
-		*node1 = what_to_push(*node1, out);
+		*node1 = what_to_push(*node1, node2, out);
 		if ((*node1)->marker == 1)
 			ft_push_out(node1, &node2, out, 1);
 		else
-			*node1 = ft_rotate_out(*node1, out, 1);
+			*node1 = ft_rotate_out(*node1, node2, out, 1);
 	}
 	return (node2);
 }

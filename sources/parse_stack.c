@@ -109,6 +109,7 @@ t_push		*parse_stack(char *str)
 //	j = 0;
 	if (!(node = malloc(sizeof(t_push))))
 		print_error();
+	node->debug_opt = 0;
 	str2 = ft_strsplit(str, ' ');
 	if (ft_strequ(str2[i], "-v"))
 	{
@@ -133,7 +134,7 @@ t_push		*parse_stack(char *str)
 	node->prev = NULL;
 	node->marker = -1;
 	if (*(str2 + 1))
-		add_list(node, str2 + 1);
+		add_list(node, str2 + i);
 	i = 0;
 	while (str2[i])
 		free(str2[i++]);

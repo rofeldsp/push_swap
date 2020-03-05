@@ -81,7 +81,7 @@ typedef struct		s_output
 ** Function declaration
  */
 
-char		*parse_string(int argc, char **argv);
+char		*parse_input(int argc, char **argv);
 void		print_error(void);
 int			main(int argc, char **argv);
 t_push		*parse_stack(char *str);
@@ -106,19 +106,19 @@ int 		find_smallest_nbr(t_push *node);
 t_push		*go_to_start(t_push *node);
 int 		len_to_start(t_push *node);
 int 		len_to_end(t_push *node);
-t_push		*sort_first_stack(t_push *node, int nbr, t_output **out);
-t_push		*rotate_ascending(t_push *node, t_output **out);
+t_push		*sort_first_stack(t_push *node, t_push *node2, int nbr, t_output **out);
+t_push		*rotate_ascending(t_push *node, t_push *node2, t_output **out);
 t_output	*allocate_output_struct(size_t size);
-t_push		*ft_reverse_out(t_push *node, t_output **out, int stack_n);
+t_push		*ft_reverse_out(t_push *node, t_push *node2, t_output **out, int stack_n);
 void		ft_push_out(t_push **node1, t_push **node2,
 													t_output **out, int s_n);
-t_push		*ft_rotate_out(t_push *node, t_output **out, int stack_n);
-t_push		*ft_swap_out(t_push *node, t_output **out, int stack_n);
+t_push		*ft_rotate_out(t_push *node, t_push *node2, t_output **out, int stack_n);
+t_push		*ft_swap_out(t_push *node, t_push *node2, t_output **out, int stack_n);
 t_output	*addlist_to_output(t_output **out);
 t_output	*combine_rotations(t_output **out);
 void		display_output(t_output *out);
-t_push 		*what_to_push(t_push *node, t_output **out);
-t_push 		*rotate_to_push(t_push *node, t_push *head, t_output **out);
+t_push 		*what_to_push(t_push *node, t_push *node2, t_output **out);
+t_push 		*rotate_to_push(t_push *node, t_push *node2, t_push *head, t_output **out);
 t_output 	*delete_node(t_output **out);
 t_output 	*put_rr(t_output **out);
 t_output 	*put_rrr(t_output **out);

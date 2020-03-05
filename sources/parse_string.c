@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-char		*parse_string(int argc, char **argv)
+char		*parse_input(int argc, char **argv)
 {
 	int		i;
 //	int		j;

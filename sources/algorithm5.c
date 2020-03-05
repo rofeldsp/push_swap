@@ -12,14 +12,14 @@
 
 #include "push_swap.h"
 
-t_push *rotate_to_push(t_push *node, t_push *head, t_output **out)
+t_push *rotate_to_push(t_push *node, t_push *node2, t_push *head, t_output **out)
 {
 	if (len_to_start(node) > len_to_end(node))
 		while (node->prev != NULL)
-			head = ft_reverse_out(head, out, 1);
+			head = ft_reverse_out(head, node2, out, 1);
 	else
 		while (node->prev != NULL)
-			head = ft_rotate_out(head, out, 1);
+			head = ft_rotate_out(head, node2, out, 1);
 	return (node);
 }
 
@@ -51,7 +51,7 @@ int		what_to_move(t_push *node1, t_push *node2)
 // элемент списка.
 }
 
-t_push	*what_to_push(t_push *node, t_output **out)
+t_push	*what_to_push(t_push *node, t_push *node2, t_output **out)
 {
 	int		len_to_edge;
 	int		len_buf;
@@ -78,7 +78,7 @@ t_push	*what_to_push(t_push *node, t_output **out)
 	while ((len_to_start(node) != len_buf && len_to_end(node) != len_buf)
 			|| node->marker == 0)
 		node = node->prev;
-	rotate_to_push(node, head, out);
+	rotate_to_push(node, node2, head, out);
 	return (node);
 }
 

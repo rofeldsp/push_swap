@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 		exit(33); // почему без этого не компилится?
 	}
 	else
-		str = parse_string(argc, argv);
+		str = parse_input(argc, argv);
 	node = parse_stack(str);
 	ft_solve(&node);
 //	free_node(node);

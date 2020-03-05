@@ -56,11 +56,11 @@ void	move_node_back(t_push **node1, t_push **node2, t_push **head,
 {
 	if (len_to_start(*node2) > len_to_end(*node2))
 		while ((*node2)->prev != NULL)
-			*head = ft_reverse_out(*head, out, 2);
+			*head = ft_reverse_out(*head, *node1, out, 2);
 	else
 		while ((*node2)->prev != NULL)
-			*head = ft_rotate_out(*head, out, 2);
-	*node1 = sort_first_stack(*node1, (*node2)->nbr, out);
+			*head = ft_rotate_out(*head, *node1, out, 2);
+	*node1 = sort_first_stack(*node1, *node2, (*node2)->nbr, out);
 	ft_push_out(node2, node1, out, 2);
 }
 
@@ -92,5 +92,5 @@ void	sort_stacks(t_push **node1, t_push **node2, t_output **out)
 //			 break ;
 //		i++;
 	 }
-	 *node1 = rotate_ascending(*node1, out);
+	 *node1 = rotate_ascending(*node1, *node2, out);
 }
