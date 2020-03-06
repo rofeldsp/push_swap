@@ -27,6 +27,7 @@
 # define DEBUG	2
 # define COLOR	4
 # define EMPTY_NODE 4294967296
+# define ALL_INDEXED -4294967296
 # define BUFFER		100
 # define INTMAX 2147483647
 # define INTMIN	-2147483648
@@ -64,7 +65,7 @@ typedef struct		s_push
 	int				debug_opt;
 	__int64_t		nbr;
 	int 			marker;
-	int 			position;
+	int 			index;
 }					t_push;
 
 /*
@@ -128,6 +129,6 @@ int64_t		what_to_move(t_push *node1, t_push *node2);
 void		free_output(t_output *node);
 void 		check_for_overload(char *str);
 void		display_stacks(t_push *node1, t_push *node2, int stack_n);
-int			find_smallest_not_indexed(t_push *node);
+int64_t		find_smallest_not_indexed(t_push *node);
 
 #endif

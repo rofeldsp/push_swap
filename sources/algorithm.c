@@ -33,32 +33,62 @@ int 	check_sequence(t_push *node)
 	return (i);
 }
 
+int 	check_index_sequence(t_push *node)
+{
+	int 	i;
+	int 	num;
+
+	i = 1;
+	num = node->index;
+	while (node->next != NULL)
+	{
+		if (node->index == num + i)
+			i++;
+		node = node->next;
+	}
+	if (node->index == num + i)
+		i++;
+	return (i);
+}
+
 int 	best_sequence(t_push *node)
 {
 	int len;
 	int swap_len;
-	int position_len;
+	int index_len;
+	int index_swap;
 
 	len = check_sequence(node);
 	node = ft_swap(node);
 	swap_len = check_sequence(node);
+	index_swap = check_index_sequence(node);
 	node = ft_swap(node);
-	len = position_len > len ? position_len : len;
+	index_len = check_index_sequence(node);
+	index_len = index_swap > index_len ? index_swap ? index_len;
+	len = index_len > len ? index_len : len;
 	return (swap_len > len ? swap_len : len);
 }
 
-void	put_position_index(t_push **node)
+void	put_index(t_push **node)
 {
-	t_push	*head;
-	int 	smallest_n;
+	int64_t 	smallest_n;
 	int 	i;
+	int 	j;
 
-	head = *node;
 	i = 1;
-	smallest_n = find_smallest_not_indexed(*node);
-	while ((*node)->nbr != smallest_n)
-		*node = ft_rotate(*node);
-	(*node)->position = i;
+	j = 0;
+	while ((smallest_n = find_smallest_not_indexed(*node)) != ALL_INDEXED)
+	{
+//		smallest_n = find_smallest_not_indexed(*node);
+		while ((*node)->nbr != smallest_n)
+		{
+			*node = ft_rotate(*node);
+			j++;
+		}
+		(*node)->index = i++;
+	}
+	while (j-- != 0)
+		*node = ft_reverse(*node);
 }
 
 /*
@@ -77,7 +107,7 @@ int 	buf_sequence(t_push *node1)
 	len = stack_length(node1);
 	i = 0;
 	sequence_len = 0;
-	put_position_index(&node1);
+	put_index(&node1);
 	while (i < len)
 	{
 		if ((check = best_sequence(node1)) > sequence_len)
@@ -89,6 +119,33 @@ int 	buf_sequence(t_push *node1)
 		i++;
 	}
 	return (buf);
+}
+
+void	leave_marks_by_index(t_push **node1, int buf, int swapper)
+{
+	t_push	*head;
+	int 	index_num;
+
+	head = *node1;
+	index_num = (*node1)->index;
+//	(*node1)->marker |= 0;
+	(*node1) = (*node1)->next;
+	while (*node1 != NULL)
+	{
+		if ((*node1)->index == index_num + 1)
+//		{
+			index_num = (*node1)->index;
+//			(*node1)->marker |= 0;
+//		}
+		else
+			(*node1)->marker = 1;
+		*node1 = (*node1)->next;
+	}
+	*node1 = head;
+	if (swapper == 1)
+		*node1 = ft_swap(*node1);
+	while (buf-- != 0)
+		*node1 = ft_reverse(*node1);
 }
 
 /*
@@ -108,9 +165,22 @@ int		leave_marks(t_push **node1, int buf)
 		*node1 = ft_rotate(*node1);
 	if (best_sequence(*node1) > check_sequence(*node1))
 	{
-		(*node1)->marker = 2;
-		*node1 = ft_swap(*node1);
-		swapper = 1;
+		if (best_sequence(*node1) == check_index_sequence(*node1))
+		{
+			leave_marks_by_index(node1, buf2, swapper);
+			return (0);
+		}
+		else
+		{
+			(*node1)->marker = 2;
+			*node1 = ft_swap(*node1);
+			swapper = 1;
+			if (check_index_sequence(*node1) > check_sequence(*node1))
+			{
+				leave_marks_by_index(node1, buf2, swapper);
+				return (swapper);
+			}
+		}
 	}
 	head = *node1;
 	num = (*node1)->nbr;
