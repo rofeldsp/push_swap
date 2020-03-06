@@ -64,7 +64,7 @@ int 	best_sequence(t_push *node)
 	index_swap = check_index_sequence(node);
 	node = ft_swap(node);
 	index_len = check_index_sequence(node);
-	index_len = index_swap > index_len ? index_swap ? index_len;
+	index_len = index_swap > index_len ? index_swap : index_len;
 	len = index_len > len ? index_len : len;
 	return (swap_len > len ? swap_len : len);
 }
@@ -221,6 +221,7 @@ t_push 	*push_to_scnd_stack(t_push **node1, t_output **out, int swapper)
 	while (count_marked_nodes(*node1) > 0)
 	{
 		*node1 = what_to_push(*node1, node2, out);
+//		*node1 = ft_rotate_out(*node1, node2, out, 1);
 		if ((*node1)->marker == 1)
 			ft_push_out(node1, &node2, out, 1);
 //		else
