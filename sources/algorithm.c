@@ -205,6 +205,22 @@ int		leave_marks(t_push **node1, int buf)
 	return (swapper);
 }
 
+int 	find_smallest_marked(t_push *node)
+{
+	int i;
+
+	while (node->marker != 1)
+		node = node->next;
+	i = node->nbr;
+	while (node != NULL)
+	{
+		if (node->nbr < i && node->marker == 1)
+			i = node->nbr;
+		node = node->next;
+	}
+	return (i);
+}
+
 /*
 ** Push all marked items of stack to stack2.
  */
@@ -220,10 +236,20 @@ t_push 	*push_to_scnd_stack(t_push **node1, t_output **out, int swapper)
 //		*node1 = ft_swap_out(*node1, node2, out, 1);
 	while (count_marked_nodes(*node1) > 0)
 	{
+//		head = *node1;
+//		num = find_smallest_marked(*node1);
+//		while ((*node1)->nbr != num)
+//			*node1 = (*node1)->next;
+//		*node1 = rotate_to_push(*node1, node2, head, out);
 		*node1 = what_to_push(*node1, node2, out);
 //		*node1 = ft_rotate_out(*node1, node2, out, 1);
+//		if (node2->nbr != EMPTY_NODE)
+//			node2 = sort_first_stack(node2, *node1, (*node1)->nbr, out);
 		if ((*node1)->marker == 1)
 			ft_push_out(node1, &node2, out, 1);
+
+//		buf = buf_sequence(*node1);
+//		swapper2 = leave_marks(node1, buf);
 //		else
 //			*node1 = ft_rotate_out(*node1, node2, out, 1);
 	}
@@ -236,6 +262,15 @@ t_push 	*push_to_scnd_stack(t_push **node1, t_output **out, int swapper)
 		*node1 = head;
 		*node1 = ft_swap_out(*node1, node2, out, 1);
 	}
+//	if (swapper == 1)
+//	{
+//		head = *node1;
+//		while ((*node1)->marker != 2)
+//			*node1 = (*node1)->next;
+//		head = rotate_to_push(*node1, node2, head, out);
+//		*node1 = head;
+//		*node1 = ft_swap_out(*node1, node2, out, 1);
+//	}
 	return (node2);
 }
 
