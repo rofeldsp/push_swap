@@ -37,12 +37,28 @@ int 	best_sequence(t_push *node)
 {
 	int len;
 	int swap_len;
+	int position_len;
 
 	len = check_sequence(node);
 	node = ft_swap(node);
 	swap_len = check_sequence(node);
 	node = ft_swap(node);
+	len = position_len > len ? position_len : len;
 	return (swap_len > len ? swap_len : len);
+}
+
+void	put_position_index(t_push **node)
+{
+	t_push	*head;
+	int 	smallest_n;
+	int 	i;
+
+	head = *node;
+	i = 1;
+	smallest_n = find_smallest_not_indexed(*node);
+	while ((*node)->nbr != smallest_n)
+		*node = ft_rotate(*node);
+	(*node)->position = i;
 }
 
 /*
@@ -61,6 +77,7 @@ int 	buf_sequence(t_push *node1)
 	len = stack_length(node1);
 	i = 0;
 	sequence_len = 0;
+	put_position_index(&node1);
 	while (i < len)
 	{
 		if ((check = best_sequence(node1)) > sequence_len)

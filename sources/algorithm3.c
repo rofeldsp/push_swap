@@ -26,6 +26,22 @@ int 	count_marked_nodes(t_push *node)
 	return (i);
 }
 
+int		find_smallest_not_indexed(t_push *node)
+{
+	int i;
+
+	while (node->position != 0)
+		node = node->next;
+	i = node->nbr;
+	while (node != NULL)
+	{
+		if (node->nbr < i && node->position == 0)
+			i = node->nbr;
+		node = node->next;
+	}
+	return (i);
+}
+
 int 	find_smallest_nbr(t_push *node)
 {
 	int i;

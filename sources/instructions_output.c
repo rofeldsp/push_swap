@@ -35,10 +35,11 @@ t_push		*ft_swap_out(t_push *node, t_push *node2, t_output **out, int stack_n)
 	*out = addlist_to_output(out);
 	(*out)->oper |= (stack_n == 1 ? SWAP_A : SWAP_B);
 	tmp = node->next;
+	node->next->next->prev = node;
 	node->next = node->next->next;
+	node->prev = tmp;
 	tmp->next = node;
 	tmp->prev = NULL;
-	node->prev = tmp;
 	if (node->debug_opt & DEBUG)
 		display_stacks(tmp, node2, stack_n);
 	return (tmp);

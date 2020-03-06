@@ -64,6 +64,7 @@ typedef struct		s_push
 	int				debug_opt;
 	__int64_t		nbr;
 	int 			marker;
+	int 			position;
 }					t_push;
 
 /*
@@ -127,5 +128,6 @@ int64_t		what_to_move(t_push *node1, t_push *node2);
 void		free_output(t_output *node);
 void 		check_for_overload(char *str);
 void		display_stacks(t_push *node1, t_push *node2, int stack_n);
+int			find_smallest_not_indexed(t_push *node);
 
 #endif
