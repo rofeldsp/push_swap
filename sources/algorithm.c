@@ -78,7 +78,7 @@ int 	buf_sequence(t_push *node1)
 ** Mark all nodes which are out of order and should be pushed to stack2.
  */
 
-void	leave_marks(t_push **node1, t_push *node2, t_output **out, int buf)
+int		leave_marks(t_push **node1, int buf)
 {
 	int num;
 	int buf2;
@@ -91,20 +91,21 @@ void	leave_marks(t_push **node1, t_push *node2, t_output **out, int buf)
 		*node1 = ft_rotate(*node1);
 	if (best_sequence(*node1) > check_sequence(*node1))
 	{
+		(*node1)->marker = 2;
 		*node1 = ft_swap(*node1);
 		swapper = 1;
 	}
 	head = *node1;
 	num = (*node1)->nbr;
-	(*node1)->marker = 0;
+//	(*node1)->marker |= 0;
 	(*node1) = (*node1)->next;
 	while (*node1 != NULL)
 	{
 		if ((*node1)->nbr > num)
-		{
+//		{
 			num = (*node1)->nbr;
-			(*node1)->marker = 0;
-		}
+//			(*node1)->marker |= 0;
+//		}
 		else
 			(*node1)->marker = 1;
 		*node1 = (*node1)->next;
@@ -114,20 +115,22 @@ void	leave_marks(t_push **node1, t_push *node2, t_output **out, int buf)
 		*node1 = ft_swap(*node1);
 	while (buf2-- != 0)
 		*node1 = ft_reverse(*node1);
+	return (swapper);
 }
 
 /*
 ** Push all marked items of stack to stack2.
  */
 
-t_push 	*push_to_scnd_stack(t_push **node1, t_output **out)
+t_push 	*push_to_scnd_stack(t_push **node1, t_output **out, int swapper)
 {
-	t_push *node2;
+	t_push	*node2;
+	t_push	*head;
 
 	node2 = allocate_struct(sizeof(t_push));
 	node2->nbr = EMPTY_NODE;
-	if (best_sequence(*node1) > check_sequence(*node1))
-		*node1 = ft_swap_out(*node1, node2, out, 1);
+//	if (best_sequence(*node1) > check_sequence(*node1))
+//		*node1 = ft_swap_out(*node1, node2, out, 1);
 	while (count_marked_nodes(*node1) > 0)
 	{
 		*node1 = what_to_push(*node1, node2, out);
@@ -135,6 +138,15 @@ t_push 	*push_to_scnd_stack(t_push **node1, t_output **out)
 			ft_push_out(node1, &node2, out, 1);
 //		else
 //			*node1 = ft_rotate_out(*node1, node2, out, 1);
+	}
+	if (swapper == 1)
+	{
+		head = *node1;
+		while ((*node1)->marker != 2)
+			*node1 = (*node1)->next;
+		head = rotate_to_push(*node1, node2, head, out);
+		*node1 = head;
+		*node1 = ft_swap_out(*node1, node2, out, 1);
 	}
 	return (node2);
 }
@@ -148,11 +160,12 @@ void	ft_solve(t_push **node1)
 	int 		buf;
 	t_push 		*node2;
 	t_output	*out;
+	int 		swapper;
 
 	out = allocate_output_struct(sizeof(t_output));
 	buf = buf_sequence(*node1);
-	leave_marks(node1, node2, &out, buf); // после этого этапа пропадает указатель на prev - пофиксить
-	node2 = push_to_scnd_stack(node1, &out);
+	swapper = leave_marks(node1, buf); // после этого этапа пропадает указатель на prev - пофиксить
+	node2 = push_to_scnd_stack(node1, &out, swapper);
 	sort_stacks(node1, &node2, &out);
 	while (out->prev != NULL)
 		out = out->prev;

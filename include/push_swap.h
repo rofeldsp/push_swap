@@ -94,8 +94,8 @@ t_push		*ft_reverse(t_push *node);
 void		ft_solve(t_push **node1);
 int 		stack_length(t_push *node);
 t_push		*allocate_struct(size_t size);
-t_push 		*push_to_scnd_stack(t_push **node1, t_output **out);
-void		leave_marks(t_push **node1, t_push *node2, t_output **out, int buf);
+t_push 		*push_to_scnd_stack(t_push **node1, t_output **out, int swapper);
+int			leave_marks(t_push **node1, int buf);
 void		move_node_back(t_push **node1, t_push **node2, t_push **head,
 						   t_output **out);
 int 		buf_sequence(t_push *node1);

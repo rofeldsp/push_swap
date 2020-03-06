@@ -59,7 +59,7 @@ void		add_list(t_push *node, char **str)
 		print_error();
 	node2->debug_opt = node->debug_opt;
 	node2->next = NULL;
-	node2->marker = -1;
+	node2->marker = 0;
 	node->next = node2;
 	node2->prev = node;
 //	j = 0;
@@ -132,7 +132,7 @@ t_push		*parse_stack(char *str)
 //		print_error();
 	node->next = NULL;
 	node->prev = NULL;
-	node->marker = -1;
+	node->marker = 0;
 	if (*(str2 + 1))
 		add_list(node, str2 + i);
 	i = 0;
