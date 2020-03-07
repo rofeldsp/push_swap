@@ -274,8 +274,107 @@ t_push 	*push_to_scnd_stack(t_push **node1, t_output **out, int swapper)
 	return (node2);
 }
 
+void	mark_stack(t_push **node1, int i, int iters)
+{
+	t_push *head;
+	int median;
+
+	median = stack_length(*node1) / iters;
+	head = *node1;
+	put_index(node1);
+	while ((*node1)->next != NULL)
+	{
+		if ((*node1)->index >= median * i && (i + 1 == iters ? 1 : (*node1)->index < median * (i + 1)))
+			(*node1)->marker = 1;
+		*node1 = (*node1)->next;
+	}
+	*node1 = head;
+}
+
+void	mark_stack2(t_push **node1)
+{
+	t_push *head;
+	int median;
+
+	median = stack_length(*node1) / 3;
+	head = *node1;
+	put_index(node1);
+	while ((*node1)->next != NULL)
+	{
+		if ((*node1)->index >= median && (*node1)->index < median * 2)
+			(*node1)->marker = 1;
+		*node1 = (*node1)->next;
+	}
+	*node1 = head;
+}
+
+void	mark_stack3(t_push **node1)
+{
+	t_push *head;
+	int median;
+
+	median = stack_length(*node1) / 3;
+	head = *node1;
+	put_index(node1);
+	while ((*node1)->next != NULL)
+	{
+		if ((*node1)->index >= median * 2)// && (*node1)->index < median * 3)
+			(*node1)->marker = 1;
+		*node1 = (*node1)->next;
+	}
+	*node1 = head;
+}
+
+void	mark_stack4(t_push **node1)
+{
+	t_push *head;
+	int median;
+
+	median = stack_length(*node1) / 5;
+	head = *node1;
+	put_index(node1);
+	while ((*node1)->next != NULL)
+	{
+		if ((*node1)->index >= median * 3 && (*node1)->index < median * 4)
+			(*node1)->marker = 1;
+		*node1 = (*node1)->next;
+	}
+	*node1 = head;
+}
+
+void	mark_stack5(t_push **node1)
+{
+	t_push *head;
+	int median;
+
+	median = stack_length(*node1) / 5;
+	head = *node1;
+	put_index(node1);
+	while ((*node1)->next != NULL)
+	{
+		if ((*node1)->index >= median * 4)
+			(*node1)->marker = 1;
+		*node1 = (*node1)->next;
+	}
+	*node1 = head;
+}
+
+void 	free_marks(t_push **node1)
+{
+	t_push	*head;
+
+	head = *node1;
+	while (*node1 != NULL)
+	{
+		(*node1)->marker = 0;
+		*node1 = (*node1)->next;
+	}
+	*node1 = head;
+}
+
 /*
- * Function responsible for finding solution
+** Function responsible for finding solution. We use swapper in different
+** situations, because of 5 variable limitation of ecole 42.
  */
 
 void	ft_solve(t_push **node1)
@@ -284,12 +383,44 @@ void	ft_solve(t_push **node1)
 	t_push 		*node2;
 	t_output	*out;
 	int 		swapper;
+	int 		iterations;
 
 	out = allocate_output_struct(sizeof(t_output));
-	buf = buf_sequence(*node1);
-	swapper = leave_marks(node1, buf); // после этого этапа пропадает указатель на prev - пофиксить
-	node2 = push_to_scnd_stack(node1, &out, swapper);
-	sort_stacks(node1, &node2, &out);
+//	buf = buf_sequence(*node1);
+//	swapper = leave_marks(node1, buf); // после этого этапа пропадает указатель на prev - пофиксить
+	if (stack_length(*node1) <= 50)
+	{
+		buf = buf_sequence(*node1);
+		swapper = leave_marks(node1, buf); // после этого этапа пропадает указатель на prev - пофиксить
+		node2 = push_to_scnd_stack(node1, &out, swapper);
+		sort_stacks(node1, &node2, &out);
+	}
+	else if (stack_length(*node1) <= 200)
+	{
+		iterations = 1;
+		swapper = 0;
+		while (swapper < iterations)
+		{
+			mark_stack(node1, swapper, iterations);
+			node2 = push_to_scnd_stack(node1, &out, 0);
+			sort_stacks(node1, &node2, &out);
+			free_marks(node1);
+			swapper++;
+		}
+	}
+	else
+	{
+		iterations = 3;
+		swapper = 0;
+		while (swapper < iterations)
+		{
+			mark_stack(node1, swapper, iterations);
+			node2 = push_to_scnd_stack(node1, &out, 0);
+			sort_stacks(node1, &node2, &out);
+			free_marks(node1);
+			swapper++;
+		}
+	}
 	while (out->prev != NULL)
 		out = out->prev;
 	out = combine_rotations(&out);
