@@ -46,9 +46,6 @@ int64_t		what_to_move(t_push *node1, t_push *node2)
 		node2 = (ticker == 0) ? node2 : node2->next;
 	}
 	return (num);
-// посчитать здесь в цикле, сколько уйдет для каждой фигуры шагов, чтобы ее
-// переместить обратно. Выбрать, что перемещаем, и вернуть указатель на этот
-// элемент списка.
 }
 
 t_push	*what_to_push(t_push *node, t_push *node2, t_output **out)

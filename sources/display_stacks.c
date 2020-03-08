@@ -15,7 +15,6 @@
 void	display_stacks_in_color(t_push *n1, t_push *n2)
 {
 	ft_printf("{yellow}---------{red}Stack A{yellow}---------||---------{red}Stack B{yellow}---------\n");
-//	ft_putstr("---------Stack A---------||---------Stack B---------\n");
 	while (n1 != NULL || n2 != NULL)
 	{
 		if (n1 == NULL || n1->nbr == EMPTY_NODE)

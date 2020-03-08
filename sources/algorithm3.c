@@ -99,8 +99,6 @@ t_push	*sort_first_stack(t_push *node, t_push *node2, int nbr, t_output **out)
 			node = node->next;
 
 	}
-//	while (nbr > node->nbr)
-//		node = node->next;
 	if (len_to_start(node) > len_to_end(node))
 		while ((node)->prev != NULL)
 			head = ft_reverse_out(head, node2, out, 1);
@@ -132,11 +130,6 @@ int		len_to_push(t_push *node, int nbr)
 		else
 			node = node->next;
 	}
-//	while (node->next != NULL && (!(nbr > node->nbr) ||
-//								  !(nbr < node->next->nbr)))
-//		node = node->next;
-//	if (node->next == NULL)
-//		return (0);
 	if (len_to_start(node) > len_to_end(node))
 		return (len_to_end(node));
 	else

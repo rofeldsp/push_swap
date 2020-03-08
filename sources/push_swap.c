@@ -26,7 +26,6 @@ int main(int argc, char **argv)
 		str = parse_input(argc, argv);
 	node = parse_stack(str);
 	ft_solve(&node);
-//	free_node(node);
 	free (str);
 	return (0);
 }

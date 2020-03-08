@@ -50,25 +50,6 @@ void		ft_push(t_push **node1, t_push **node2)
 	*node1 = tmp;
 	if (*node1 != NULL)
 		(*node1)->prev = NULL;
-//	t_push *tmp1;
-//
-//	tmp1 = allocate_struct(sizeof(t_push));
-//	*tmp1 = **node1;
-//	tmp1->prev = NULL;
-//	if ((*node2)->nbr == EMPTY_NODE)
-//	{
-//		tmp1->next = NULL;
-//		*node2 = tmp1;
-//	}
-//	else
-//	{
-//		tmp1->next = *node2;
-//		(*node2)->prev = tmp1;
-//		*node2 = tmp1;
-//	}
-//	*node1 = (*node1)->next;
-//	(*node1)->prev = NULL;
-//	free(tmp1);
 }
 
 t_push		*ft_rotate(t_push *node)
@@ -76,7 +57,6 @@ t_push		*ft_rotate(t_push *node)
 	t_push	*tmp;
 	t_push	*head;
 
-//	tmp = malloc(sizeof(t_push));
 	if (node == NULL || node->next == NULL)
 		return (node);
 	head = node->next;

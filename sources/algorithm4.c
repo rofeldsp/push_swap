@@ -14,11 +14,9 @@
 
 t_output 	*delete_node(t_output **out)
 {
-//	t_output	*pre;
 	t_output	*nex;
-//
+
 	nex = (*out)->next;
-//	pre = (*out)->prev;
 	(*out)->prev->next = (*out)->next;
 	(*out)->next->prev = (*out)->prev;
 	free(*out);
@@ -116,5 +114,5 @@ t_output	*combine_rotations(t_output **out)
 		if ((*out)->next != NULL)
 			*out = (*out)->next;
 	}
-	return (head); // обработать вариант, где head удаляется
+	return (head);
 }

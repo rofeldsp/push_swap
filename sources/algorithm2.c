@@ -69,30 +69,15 @@ void	sort_stacks(t_push **node1, t_push **node2, t_output **out)
 	t_push	*head2;
 	int 	move_nbr;
 
-//	*node1 = rotate_ascending(*node1, out);
 	while (*node2 != NULL)// || (*node2)->nbr != EMPTY_NODE)
 	 {
-//	 	while ((*node2) != NULL)
-//		{
 			if ((*node2)->nbr == EMPTY_NODE)
 				break;
 	 		move_nbr = what_to_move(*node1, *node2);
-//			i = find_smallest_nbr(*node2);
 			head2 = go_to_start(*node2);
 			while ((*node2)->nbr != move_nbr)
 				*node2 = (*node2)->next;
-//			if ((*node2)->nbr == i && *node2 != NULL)
 			move_node_back(node1, node2, &head2, out);
-//			if (*node2 != NULL)
-//				*node2 = (*node2)->next;
-//			else
-//				break ;
-//		}
-//		 if (*node2 != NULL)
-//			 *node2 = go_to_start(*node2);
-//		 else
-//			 break ;
-//		i++;
 	 }
 	 *node1 = rotate_ascending(*node1, *node2, out);
 }

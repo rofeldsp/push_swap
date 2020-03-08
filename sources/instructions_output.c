@@ -16,7 +16,6 @@ t_output 		*addlist_to_output(t_output **out)
 {
 	if ((*out)->oper == 0)
 		return (*out);
-//		*out = allocate_output_struct(sizeof(t_output));
 	else
 	{
 		(*out)->next = allocate_output_struct(sizeof(t_output));
@@ -71,25 +70,6 @@ void		ft_push_out(t_push **node1, t_push **node2, t_output **out, int s_n)
 	if ((*node1 != NULL && (*node1)->debug_opt & DEBUG) || (*node2 != NULL
 											&& (*node2)->debug_opt & DEBUG))
 		display_stacks(*node1, *node2, s_n);
-//	t_push *tmp1;
-//
-//	tmp1 = allocate_struct(sizeof(t_push));
-//	*tmp1 = **node1;
-//	tmp1->prev = NULL;
-//	if ((*node2)->nbr == EMPTY_NODE)
-//	{
-//		tmp1->next = NULL;
-//		*node2 = tmp1;
-//	}
-//	else
-//	{
-//		tmp1->next = *node2;
-//		(*node2)->prev = tmp1;
-//		*node2 = tmp1;
-//	}
-//	*node1 = (*node1)->next;
-//	(*node1)->prev = NULL;
-//	free(tmp1);
 }
 
 t_push		*ft_rotate_out(t_push *node, t_push *node2, t_output **out, int stack_n)
