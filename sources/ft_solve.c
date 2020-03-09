@@ -43,7 +43,7 @@ void	ft_solve2(t_push **node1, t_push **node2, t_output **out)
 ** situations, because of 5 variable limitation of ecole 42.
 */
 
-void	ft_solve(t_push **node1)
+void	ft_solve(t_push **node1, int *fd)
 {
 	t_push		*node2;
 	t_output	*out;
@@ -67,7 +67,7 @@ void	ft_solve(t_push **node1)
 	while (out->prev != NULL)
 		out = out->prev;
 	out = combine_rotations(&out);
-	display_output(out);
+	display_output(out, (*node1)->debug_opt, fd);
 	free_output(out);
 }
 

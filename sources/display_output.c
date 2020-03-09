@@ -12,38 +12,45 @@
 
 #include "push_swap.h"
 
-void		display_output2(t_output *out)
+void		display_output2(t_output *out, int *fd)
 {
 	if (out->oper == ROT_A)
-		write(1, "ra", 2);
+		write(*fd, "ra", 2);
 	else if (out->oper == ROT_B)
-		write(1, "rb", 2);
+		write(*fd, "rb", 2);
 	else if (out->oper == RR)
-		write(1, "rr", 2);
+		write(*fd, "rr", 2);
 	else if (out->oper == RROT_A)
-		write(1, "rra", 3);
+		write(*fd, "rra", 3);
 	else if (out->oper == RROT_B)
-		write(1, "rrb", 3);
+		write(*fd, "rrb", 3);
 	else if (out->oper == RRR)
-		write(1, "rrr", 3);
+		write(*fd, "rrr", 3);
 }
 
-void		display_output(t_output *out)
+void		display_output(t_output *out, int flag, int *fd)
 {
+	if (flag & FILE)
+		*fd = open("output.txt", O_WRONLY);
+	else
+		*fd = 1;
+	if (*fd == -1)
+		print_error_fd();
 	while (out != NULL)
 	{
 		if (out->oper == SWAP_A)
-			write(1, "sa", 2);
+			write(*fd, "sa", 2);
 		else if (out->oper == SWAP_B)
-			write(1, "sb", 2);
+			write(*fd, "sb", 2);
 		else if (out->oper == SS)
-			write(1, "ss", 2);
+			write(*fd, "ss", 2);
 		else if (out->oper == PUSH_A)
-			write(1, "pa", 2);
+			write(*fd, "pa", 2);
 		else if (out->oper == PUSH_B)
-			write(1, "pb", 2);
-		display_output2(out);
-		write(1, "\n", 1);
+			write(*fd, "pb", 2);
+		else
+			display_output2(out, fd);
+		write(*fd, "\n", 1);
 		out = out->next;
 	}
 }

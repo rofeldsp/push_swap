@@ -51,6 +51,7 @@ SOURCE_FILES_CHECKER = checker.c \
             increase_buffer.c \
             parse_string.c \
             print_error.c \
+            create_node2.c\
             parse_stack.c \
             put_index.c \
             free_node.c \

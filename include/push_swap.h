@@ -26,6 +26,7 @@
 
 # define DEBUG			2
 # define COLOR			4
+# define FILE			8
 # define EMPTY_NODE		4294967296
 # define ALL_INDEXED	-4294967296
 # define BUFFER			100
@@ -92,7 +93,7 @@ void					ft_push(t_push **node1, t_push **node2);
 t_push					*ft_rotate(t_push *node);
 void					free_node(t_push *node);
 t_push					*ft_reverse(t_push *node);
-void					ft_solve(t_push **node1);
+void					ft_solve(t_push **node1, int *fd);
 int						stack_length(t_push *node);
 t_push					*allocate_struct(size_t size);
 t_push					*push_to_scnd_stack(t_push **node1, t_output **out,
@@ -124,7 +125,7 @@ t_push					*ft_swap_out(t_push *node, t_push *node2,
 												t_output **out, int stack_n);
 t_output				*addlist_to_output(t_output **out);
 t_output				*combine_rotations(t_output **out);
-void					display_output(t_output *out);
+void					display_output(t_output *out, int flag, int *fd);
 t_push					*what_to_push(t_push *node, t_push *node2,
 																t_output **out);
 t_push					*rotate_to_push(t_push *node, t_push *node2,
@@ -149,5 +150,7 @@ void					leave_marks_by_index(t_push **node1, int buf,
 int						leave_marks2(t_push **node1, int buf2, int	swapper);
 void					leave_marks3(t_push **node1);
 char					*ft_increase_buffer(char **str);
+void					print_error_fd(void);
+void					create_node2(t_push **node2);
 
 #endif

@@ -16,12 +16,14 @@ int		main(int argc, char **argv)
 {
 	char		*str;
 	t_push		*node;
+	int			fd;
 
 	if (argc == 1)
 		print_error();
 	str = parse_input(argc, argv);
 	node = parse_stack(str);
-	ft_solve(&node);
+	ft_solve(&node, &fd);
+	close(fd);
 	free_node(node);
 	free(str);
 	return (0);

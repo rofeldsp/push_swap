@@ -84,6 +84,11 @@ int			parse_flags(t_push **node, int i, char **str2)
 		(*node)->debug_opt |= COLOR;
 		i++;
 	}
+	if (ft_strequ(str2[i], "-f"))
+	{
+		(*node)->debug_opt |= FILE;
+		i++;
+	}
 	return (i);
 }
 

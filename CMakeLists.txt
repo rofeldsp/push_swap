@@ -96,7 +96,7 @@ add_executable(push_swap_owngit
     libft/ft_toupper.c
     libft/libft.h
     sources/allocate_struct.c
-#    sources/checker.c
+    sources/checker.c
     sources/display_output.c
     sources/display_stacks.c
     sources/find_best_sequence.c
@@ -107,10 +107,10 @@ add_executable(push_swap_owngit
     sources/parse_stack.c
     sources/parse_string.c
     sources/print_error.c
-    sources/push_swap.c
+#    sources/push_swap.c
     sources/push_to_scnd_stack.c
     sources/put_index.c
     sources/put_reverses.c
     sources/sort_first_stack.c
     sources/sort_stacks.c
-    sources/what_to_push.c sources/increase_buffer.c)
+    sources/what_to_push.c sources/increase_buffer.c sources/create_node2.c)
