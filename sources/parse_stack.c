@@ -74,19 +74,17 @@ void		check_for_overload(char *str)
 
 int			parse_flags(t_push **node, int i, char **str2)
 {
-	if (ft_strequ(str2[i], "-v"))
+	while (ft_strequ(str2[i], "-v") || ft_strequ(str2[i], "-c") ||
+	ft_strequ(str2[i], "-f") || ft_strequ(str2[i], "-n"))
 	{
-		(*node)->debug_opt |= DEBUG;
-		i++;
-	}
-	if (ft_strequ(str2[i], "-c"))
-	{
-		(*node)->debug_opt |= COLOR;
-		i++;
-	}
-	if (ft_strequ(str2[i], "-f"))
-	{
-		(*node)->debug_opt |= FILE;
+		if (ft_strequ(str2[i], "-v"))
+			(*node)->debug_opt |= DEBUG;
+		else if (ft_strequ(str2[i], "-c"))
+			(*node)->debug_opt |= COLOR;
+		else if (ft_strequ(str2[i], "-f"))
+			(*node)->debug_opt |= FILE;
+		else if (ft_strequ(str2[i], "-n"))
+			(*node)->debug_opt |= N_OPERS;
 		i++;
 	}
 	return (i);

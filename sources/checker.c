@@ -12,6 +12,16 @@
 
 #include "push_swap.h"
 
+int		parse_instructions3(char *str, int i)
+{
+	if (!(ft_strncmp(str + i, "rrr", 3)) || !(ft_strncmp(str + i, "rra", 3))
+		|| !(ft_strncmp(str + i, "rrb", 3)))
+		i += 4;
+	else
+		i += 3;
+	return (i);
+}
+
 void	parse_instructions2(t_push **node1, t_push **node2, int i, char *str)
 {
 	if (!(ft_strncmp(str + i, "pa", 2)))
@@ -62,26 +72,9 @@ void	parse_instructions(char *str, t_push **node1)
 		}
 		else
 			parse_instructions2(node1, &node2, i, str);
-		if (!(ft_strncmp(str + i, "rrr", 3)) || !(ft_strncmp(str + i, "rra", 3))
-				|| !(ft_strncmp(str + i, "rrb", 3)))
-			i += 4;
-		else
-			i += 3;
+		i = parse_instructions3(str, i);
 	}
 	free_node(node2);
-}
-
-int		ft_check_fd(t_push **node1)
-{
-	int		fd;
-
-	if ((*node1)->debug_opt & FILE)
-		fd = open("output.txt", O_RDONLY); //поменять
-	else
-		fd = 0;
-	if (fd == -1)
-		print_error_fd();
-	return (fd);
 }
 
 int		check_output(t_push **node1, int *fd)
@@ -121,7 +114,7 @@ int		main(int argc, char **argv)
 	int		fd;
 
 	if (argc == 1)
-		print_error();
+		return (0);
 	str = parse_input(argc, argv);
 	node = parse_stack(str);
 	result = check_output(&node, &fd);

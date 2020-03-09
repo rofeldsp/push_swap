@@ -32,6 +32,7 @@ SOURCE_FILES = push_swap.c \
             parse_string.c \
             print_error.c \
             parse_stack.c \
+            ft_check_fd.c \
             ft_solve.c \
             sort_stacks.c \
             sort_first_stack.c \
@@ -54,6 +55,7 @@ SOURCE_FILES_CHECKER = checker.c \
             create_node2.c\
             parse_stack.c \
             put_index.c \
+            ft_check_fd.c \
             free_node.c \
             display_stacks.c \
             ft_solve.c \

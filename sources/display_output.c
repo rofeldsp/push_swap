@@ -30,12 +30,10 @@ void		display_output2(t_output *out, int *fd)
 
 void		display_output(t_output *out, int flag, int *fd)
 {
-	if (flag & FILE)
-		*fd = open("output.txt", O_WRONLY);
-	else
-		*fd = 1;
-	if (*fd == -1)
-		print_error_fd();
+	int		i;
+
+	i = 0;
+	fd_to_output(flag, fd);
 	while (out != NULL)
 	{
 		if (out->oper == SWAP_A)
@@ -52,7 +50,10 @@ void		display_output(t_output *out, int flag, int *fd)
 			display_output2(out, fd);
 		write(*fd, "\n", 1);
 		out = out->next;
+		i++;
 	}
+	if (flag & N_OPERS)
+		ft_printf("Number of steps used: %d\n", i);
 }
 
 /*

@@ -27,6 +27,7 @@
 # define DEBUG			2
 # define COLOR			4
 # define FILE			8
+# define N_OPERS		16
 # define EMPTY_NODE		4294967296
 # define ALL_INDEXED	-4294967296
 # define BUFFER			100
@@ -152,5 +153,7 @@ void					leave_marks3(t_push **node1);
 char					*ft_increase_buffer(char **str);
 void					print_error_fd(void);
 void					create_node2(t_push **node2);
+int						ft_check_fd(t_push **node1);
+void					fd_to_output(int flag, int *fd);
 
 #endif
