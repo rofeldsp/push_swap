@@ -136,5 +136,7 @@ void					mark_stack(t_push **node1, int i, int iters);
 void 					free_marks(t_push **node1);
 int 					check_index_sequence(t_push *node);
 void					leave_marks_by_index(t_push **node1, int buf, int swapper);
+int 					leave_marks2(t_push **node1, int buf2, int	swapper);
+void					leave_marks3(t_push **node1);
 
 #endif

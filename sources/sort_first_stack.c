@@ -12,41 +12,7 @@
 
 #include "push_swap.h"
 
-int 	count_marked_nodes(t_push *node)
-{
-	int i;
-
-	i = 0;
-	while (node != NULL)
-	{
-		if (node->marker == 1)
-			i++;
-		node = node->next;
-	}
-	return (i);
-}
-
-int64_t 	find_smallest_not_indexed(t_push *node)
-{
-	int i;
-
-	while (node->index != 0)
-	{
-		if (node->next == NULL)
-			return (ALL_INDEXED);
-		node = node->next;
-	}
-	i = node->nbr;
-	while (node != NULL)
-	{
-		if (node->nbr < i && node->index == 0)
-			i = node->nbr;
-		node = node->next;
-	}
-	return (i);
-}
-
-int 	find_smallest_nbr(t_push *node)
+int			find_smallest_nbr(t_push *node)
 {
 	int i;
 
@@ -60,7 +26,7 @@ int 	find_smallest_nbr(t_push *node)
 	return (i);
 }
 
-int 	find_largest_nbr(t_push *node)
+int			find_largest_nbr(t_push *node)
 {
 	int i;
 
@@ -78,16 +44,15 @@ int 	find_largest_nbr(t_push *node)
 ** Sort stack1 so the head->nbr will be bigger than node-nbr from stack2.
  */
 
-t_push	*sort_first_stack(t_push *node, t_push *node2, int nbr, t_output **out)
+t_push		*sort_first_stack(t_push *node, t_push *node2,
+													int nbr, t_output **out)
 {
 	t_push *head;
 
 	head = node;
 	if (nbr > find_largest_nbr(node) || nbr < find_smallest_nbr(node))
-	{
 		while (node->nbr != find_smallest_nbr(node))
 			node = node->next;
-	}
 	else
 	{
 		while (node->next != NULL && (!(nbr > node->nbr) ||
@@ -97,7 +62,6 @@ t_push	*sort_first_stack(t_push *node, t_push *node2, int nbr, t_output **out)
 			return(head);
 		else
 			node = node->next;
-
 	}
 	if (len_to_start(node) > len_to_end(node))
 		while ((node)->prev != NULL)
@@ -113,7 +77,7 @@ t_push	*sort_first_stack(t_push *node, t_push *node2, int nbr, t_output **out)
 ** Calculate a number of steps to rotate stack1 to push node fro, stack2.
  */
 
-int		len_to_push(t_push *node, int nbr)
+int			len_to_push(t_push *node, int nbr)
 {
 	if (nbr > find_largest_nbr(node) || nbr < find_smallest_nbr(node))
 	{
@@ -140,10 +104,10 @@ int		len_to_push(t_push *node, int nbr)
 ** Rotate stack, so all the numbers will be in ascending order
  */
 
-t_push	*rotate_ascending(t_push *node, t_push *node2, t_output **out)
+t_push		*rotate_ascending(t_push *node, t_push *node2, t_output **out)
 {
-	int i;
-	t_push *head;
+	int			i;
+	t_push		*head;
 
 	head = node;
 	i = find_smallest_nbr(node);

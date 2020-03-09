@@ -14,8 +14,8 @@
 
 int main(int argc, char **argv)
 {
-	char *str;
-	t_push *node;
+	char		*str;
+	t_push		*node;
 
 	if (argc == 1)
 	{

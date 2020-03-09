@@ -32,32 +32,38 @@ SOURCE_FILES = push_swap.c \
             parse_string.c \
             print_error.c \
             parse_stack.c \
-            algorithm.c \
-            algorithm2.c \
-            algorithm3.c \
-            algorithm4.c \
-            algorithm5.c \
-            algorithm6.c \
+            ft_solve.c \
+            sort_stacks.c \
+            sort_first_stack.c \
+            display_output.c \
+            what_to_push.c \
+            put_reverses.c \
+            push_to_scnd_stack.c \
             free_node.c \
+            put_index.c \
             display_stacks.c \
             allocate_struct.c \
             instructions.c \
-            instructions_output.c
+            instructions_output.c \
+            find_best_sequence.c
 
 SOURCE_FILES_CHECKER = checker.c \
             parse_string.c \
             print_error.c \
             parse_stack.c \
+            put_index.c \
             free_node.c \
-            algorithm.c \
             display_stacks.c \
-            algorithm2.c \
-            algorithm3.c \
-            algorithm4.c \
-            algorithm5.c \
-            algorithm6.c \
+            ft_solve.c \
+            put_reverses.c \
+            sort_stacks.c \
+            sort_first_stack.c \
+            display_output.c \
+            what_to_push.c \
+            push_to_scnd_stack.c \
             allocate_struct.c \
             instructions.c \
+            find_best_sequence.c \
             instructions_output.c
 
 SOURCES = $(addprefix $(DIR_S), $(SOURCE_FILES))

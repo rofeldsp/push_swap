@@ -12,16 +12,6 @@
 
 #include "push_swap.h"
 
-t_output 	*delete_node(t_output **out)
-{
-	t_output	*nex;
-
-	nex = (*out)->next;
-	(*out)->prev->next = (*out)->next;
-	(*out)->next->prev = (*out)->prev;
-	free(*out);
-	return (nex);
-}
 
 void 		display_output2(t_output *out)
 {
@@ -54,7 +44,7 @@ void		display_output(t_output *out)
 		else if (out->oper == PUSH_B)
 			write(1, "pb", 2);
 		display_output2(out);
-		if (out->next != NULL)
+//		if (out->next != NULL)
 			write(1, "\n", 1);
 		out = out->next;
 	}
@@ -65,52 +55,65 @@ void		display_output(t_output *out)
 ** and substitutes all the rotation_a and rotation_b with rotate_both and
 ** reverse_a and reverse_b with reverse_both if they are situated between
 ** pushes.
+**
+** Counter variable consists of:
+** 1) Counter of RA operations
+** 2) Counter of RB operations
+** 3) Counter of RRA operations
+** 4) Counter of RRB operations
  */
+
+void		combine_rotations3(t_output **out, int counter[4])
+{
+	while ((counter[0] != 0 && counter[1] != 0) ||
+		   (counter[2] != 0 && counter[3] != 0))
+	{
+		if (counter[0] != 0 && counter[1] != 0)
+		{
+			*out = put_rr(out);
+			counter[0]--;
+			counter[1]--;
+		}
+		else if (counter[2] != 0 && counter[3] != 0)
+		{
+			*out = put_rrr(out);
+			counter[2]--;
+			counter[3]--;
+		}
+		*out = (*out)->prev;
+	}
+}
+
+void		combine_rotations2(t_output **out, int counter[4])
+{
+	counter[0] = 0;
+	counter[1] = 0;
+	counter[2] = 0;
+	counter[3] = 0;
+	while (!((*out)->oper & (PUSH_A | PUSH_B)) && (*out)->next != NULL)
+	{
+		if ((*out)->oper & ROT_A)
+			counter[0]++;
+		else if ((*out)->oper & ROT_B)
+			counter[1]++;
+		else if ((*out)->oper & RROT_A)
+			counter[2]++;
+		else if ((*out)->oper & RROT_B)
+			counter[3]++;
+		*out = (*out)->next;
+	}
+}
 
 t_output	*combine_rotations(t_output **out)
 {
-	t_output *head;
-	int count_ra;
-	int count_rra;
-	int count_rb;
-	int count_rrb;
+	t_output	*head;
+	int 		counter[4];
 
 	head = *out;
 	while ((*out)->next != NULL)
 	{
-		count_ra = 0;
-		count_rb = 0;
-		count_rra = 0;
-		count_rrb = 0;
-		while (!((*out)->oper & (PUSH_A | PUSH_B)) && (*out)->next != NULL)
-		{
-			if ((*out)->oper & ROT_A)
-				count_ra++;
-			else if ((*out)->oper & ROT_B)
-				count_rb++;
-			else if ((*out)->oper & RROT_A)
-				count_rra++;
-			else if ((*out)->oper & RROT_B)
-				count_rrb++;
-			*out = (*out)->next;
-		}
-		while ((count_ra != 0 && count_rb != 0) ||
-										(count_rra != 0 && count_rrb != 0))
-		{
-			if (count_ra != 0 && count_rb != 0)
-			{
-				*out = put_rr(out);
-				count_ra--;
-				count_rb--;
-			}
-			else if (count_rra != 0 && count_rrb != 0)
-			{
-				*out = put_rrr(out);
-				count_rra--;
-				count_rrb--;
-			}
-			*out = (*out)->prev;
-		}
+		combine_rotations2(out, counter);
+		combine_rotations3(out, counter);
 		if ((*out)->next != NULL)
 			*out = (*out)->next;
 	}

@@ -17,7 +17,7 @@
 ** its starting point
  */
 
-int 	buf_sequence(t_push *node1)
+int 		buf_sequence(t_push *node1)
 {
 	int		i;
 	int 	len;
@@ -42,7 +42,7 @@ int 	buf_sequence(t_push *node1)
 	return (buf);
 }
 
-void	leave_marks_by_index(t_push **node1, int buf, int swapper)
+void		leave_marks_by_index(t_push **node1, int buf, int swapper)
 {
 	t_push	*head;
 	int 	index_num;
@@ -69,48 +69,20 @@ void	leave_marks_by_index(t_push **node1, int buf, int swapper)
 ** Mark all nodes which are out of order and should be pushed to stack2.
  */
 
-int		leave_marks(t_push **node1, int buf)
+int			leave_marks(t_push **node1, int buf)
 {
-	int num;
 	int buf2;
 	int swapper;
-	t_push	*head;
 
 	buf2 = buf;
 	swapper = 0;
 	while (buf-- != 0)
 		*node1 = ft_rotate(*node1);
-	if (best_sequence(*node1) > check_sequence(*node1))
-	{
-		if (best_sequence(*node1) == check_index_sequence(*node1))
-		{
-			leave_marks_by_index(node1, buf2, swapper);
-			return (0);
-		}
-		else
-		{
-			(*node1)->marker = 2;
-			*node1 = ft_swap(*node1);
-			swapper = 1;
-			if (check_index_sequence(*node1) > check_sequence(*node1))
-			{
-				leave_marks_by_index(node1, buf2, swapper);
-				return (swapper);
-			}
-		}
-	}
-	head = *node1;
-	num = (*node1)->nbr;
-	(*node1) = (*node1)->next;
-	while (*node1 != NULL)
-	{
-		if ((*node1)->nbr > num)
-			num = (*node1)->nbr;
-		else
-			(*node1)->marker = 1;
-		*node1 = (*node1)->next;
-	}
-	*node1 = head;
+	if ((swapper = leave_marks2(node1, buf2, swapper)) >= 0)
+		return (swapper);
+	else if (swapper == -2)
+		swapper = 1;
+	leave_marks3(node1);
 	if (swapper == 1)
 		*node1 = ft_swap(*node1);
 	while (buf2-- != 0)
@@ -138,7 +110,7 @@ int		leave_marks(t_push **node1, int buf)
 ** Push all marked items of stack to stack2.
  */
 
-t_push 	*push_to_scnd_stack(t_push **node1, t_output **out, int swapper)
+t_push 		*push_to_scnd_stack(t_push **node1, t_output **out, int swapper)
 {
 	t_push	*node2;
 	t_push	*head;
@@ -163,10 +135,10 @@ t_push 	*push_to_scnd_stack(t_push **node1, t_output **out, int swapper)
 	return (node2);
 }
 
-void	mark_stack(t_push **node1, int i, int iters)
+void		mark_stack(t_push **node1, int i, int iters)
 {
-	t_push *head;
-	int median;
+	t_push		*head;
+	int			median;
 
 	median = stack_length(*node1) / iters;
 	head = *node1;
@@ -180,15 +152,3 @@ void	mark_stack(t_push **node1, int i, int iters)
 	*node1 = head;
 }
 
-void 	free_marks(t_push **node1)
-{
-	t_push	*head;
-
-	head = *node1;
-	while (*node1 != NULL)
-	{
-		(*node1)->marker = 0;
-		*node1 = (*node1)->next;
-	}
-	*node1 = head;
-}
