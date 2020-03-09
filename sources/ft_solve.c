@@ -69,6 +69,7 @@ void	ft_solve(t_push **node1, int *fd)
 	out = combine_rotations(&out);
 	display_output(out, (*node1)->debug_opt, fd);
 	free_output(out);
+	free(node2);
 }
 
 int		stack_length(t_push *node)
