@@ -12,7 +12,8 @@
 
 #include "push_swap.h"
 
-t_push		*rotate_to_push(t_push *node, t_push *node2, t_push *head, t_output **out)
+t_push		*rotate_to_push(t_push *node, t_push *node2, t_push *head,
+																t_output **out)
 {
 	if (len_to_start(node) > len_to_end(node))
 		while (node->prev != NULL)
@@ -25,10 +26,10 @@ t_push		*rotate_to_push(t_push *node, t_push *node2, t_push *head, t_output **ou
 
 int64_t		what_to_move(t_push *node1, t_push *node2)
 {
-	int 	ticker;
-	int 	len2;
-	int 	len1;
-	int 	buf;
+	int		ticker;
+	int		len2;
+	int		len1;
+	int		buf;
 	int64_t	num;
 
 	buf = -1;
@@ -51,7 +52,7 @@ int64_t		what_to_move(t_push *node1, t_push *node2)
 void		what_to_push2(t_push **node, int *len_buf)
 {
 	int		len_to_edge;
-	int 	ticker;
+	int		ticker;
 
 	ticker = 0;
 	while (ticker != 1)
@@ -59,7 +60,7 @@ void		what_to_push2(t_push **node, int *len_buf)
 		if ((*node)->marker == 1)
 		{
 			len_to_edge = len_to_start(*node) > len_to_end(*node) ?
-						  len_to_end(*node) : len_to_start(*node);
+									len_to_end(*node) : len_to_start(*node);
 			if (len_to_edge < *len_buf || *len_buf == -1)
 				*len_buf = len_to_edge;
 		}

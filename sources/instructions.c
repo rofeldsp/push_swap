@@ -86,6 +86,6 @@ t_push		*ft_reverse(t_push *node)
 	node->prev = tmp;
 	node->prev->next = node;
 	node = node->prev;
-	node->prev =  NULL;
+	node->prev = NULL;
 	return (node);
 }

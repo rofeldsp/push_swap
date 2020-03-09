@@ -36,7 +36,7 @@ void		free_output(t_output *node)
 	}
 }
 
-t_output 	*delete_node(t_output **out)
+t_output	*delete_node(t_output **out)
 {
 	t_output	*nex;
 
@@ -47,7 +47,7 @@ t_output 	*delete_node(t_output **out)
 	return (nex);
 }
 
-void 		free_marks(t_push **node1)
+void		free_marks(t_push **node1)
 {
 	t_push	*head;
 

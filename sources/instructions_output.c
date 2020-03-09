@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-t_output 		*addlist_to_output(t_output **out)
+t_output	*addlist_to_output(t_output **out)
 {
 	if ((*out)->oper == 0)
 		return (*out);
@@ -25,7 +25,8 @@ t_output 		*addlist_to_output(t_output **out)
 	return (*out);
 }
 
-t_push		*ft_swap_out(t_push *node, t_push *node2, t_output **out, int stack_n)
+t_push		*ft_swap_out(t_push *node, t_push *node2, t_output **out,
+																	int stack_n)
 {
 	t_push *tmp;
 
@@ -72,7 +73,8 @@ void		ft_push_out(t_push **node1, t_push **node2, t_output **out, int s_n)
 		display_stacks(*node1, *node2, s_n);
 }
 
-t_push		*ft_rotate_out(t_push *node, t_push *node2, t_output **out, int stack_n)
+t_push		*ft_rotate_out(t_push *node, t_push *node2, t_output **out,
+																	int stack_n)
 {
 	t_push	*tmp;
 	t_push	*head;
@@ -94,7 +96,8 @@ t_push		*ft_rotate_out(t_push *node, t_push *node2, t_output **out, int stack_n)
 	return (head);
 }
 
-t_push		*ft_reverse_out(t_push *node, t_push *node2, t_output **out, int stack_n)
+t_push		*ft_reverse_out(t_push *node, t_push *node2, t_output **out,
+																	int stack_n)
 {
 	t_push	*tmp;
 
@@ -112,8 +115,8 @@ t_push		*ft_reverse_out(t_push *node, t_push *node2, t_output **out, int stack_n
 	node->prev = tmp;
 	node->prev->next = node;
 	node = node->prev;
-	node->prev =  NULL;
-	if (node->debug_opt & DEBUG) // change to &
+	node->prev = NULL;
+	if (node->debug_opt & DEBUG)
 		display_stacks(node, node2, stack_n);
 	return (node);
 }

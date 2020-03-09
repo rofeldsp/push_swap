@@ -1,10 +1,18 @@
-//
-// Created by Igor Krasnov on 09.03.20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   put_reverses.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rofeldsp <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/09 11:43:35 by rofeldsp          #+#    #+#             */
+/*   Updated: 2020/03/09 11:43:36 by rofeldsp         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_output *put_rr(t_output **out)
+t_output	*put_rr(t_output **out)
 {
 	t_output	*head;
 	int			switcher;
@@ -29,7 +37,7 @@ t_output *put_rr(t_output **out)
 	return (head);
 }
 
-t_output *put_rrr(t_output **out)
+t_output	*put_rrr(t_output **out)
 {
 	t_output	*head;
 	int			switcher;

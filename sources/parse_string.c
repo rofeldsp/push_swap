@@ -16,7 +16,7 @@ char		*parse_input(int argc, char **argv)
 {
 	int		i;
 	char	*str;
-	char 	*tmp;
+	char	*tmp;
 
 	i = 1;
 	if (!(str = ft_strdup(argv[i++])))
@@ -25,10 +25,10 @@ char		*parse_input(int argc, char **argv)
 	{
 		if (!(tmp = ft_strjoin(str, " ")))
 			print_error();
-		free (str);
+		free(str);
 		if (!(str = ft_strjoin(tmp, argv[i++])))
 			print_error();
-		free (tmp);
+		free(tmp);
 	}
 	return (str);
 }

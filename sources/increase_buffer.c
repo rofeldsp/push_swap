@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   parse_instructions_checker.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rofeldsp <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/19 13:24:07 by rofeldsp          #+#    #+#             */
-/*   Updated: 2020/02/19 13:24:10 by rofeldsp         ###   ########.fr       */
+/*   Created: 2020/03/09 11:48:25 by rofeldsp          #+#    #+#             */
+/*   Updated: 2020/03/09 11:48:27 by rofeldsp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		main(int argc, char **argv)
+char	*ft_increase_buffer(char **str)
 {
-	char		*str;
-	t_push		*node;
+	char *dest;
 
-	if (argc == 1)
+	if (!(dest = ft_strnew(ft_strlen(*str) + BUFFER + 1)))
 		print_error();
-	str = parse_input(argc, argv);
-	node = parse_stack(str);
-	ft_solve(&node);
-	free_node(node);
-	free(str);
-	return (0);
+	dest = ft_strcpy(dest, *str);
+	free(*str);
+	return (dest);
 }

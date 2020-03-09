@@ -10,20 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
 /*
 ** Find the longest sequence of sorted ints in the stack and remember
 ** its starting point
- */
+*/
 
-int 		buf_sequence(t_push *node1)
+#include "push_swap.h"
+
+int			buf_sequence(t_push *node1)
 {
 	int		i;
-	int 	len;
+	int		len;
 	int		sequence_len;
-	int 	buf;
-	int 	check;
+	int		buf;
+	int		check;
 
 	len = stack_length(node1);
 	i = 0;
@@ -45,7 +45,7 @@ int 		buf_sequence(t_push *node1)
 void		leave_marks_by_index(t_push **node1, int buf, int swapper)
 {
 	t_push	*head;
-	int 	index_num;
+	int		index_num;
 
 	head = *node1;
 	index_num = (*node1)->index;
@@ -67,7 +67,7 @@ void		leave_marks_by_index(t_push **node1, int buf, int swapper)
 
 /*
 ** Mark all nodes which are out of order and should be pushed to stack2.
- */
+*/
 
 int			leave_marks(t_push **node1, int buf)
 {
@@ -90,27 +90,11 @@ int			leave_marks(t_push **node1, int buf)
 	return (swapper);
 }
 
-//int 	find_smallest_marked(t_push *node)
-//{
-//	int i;
-//
-//	while (node->marker != 1)
-//		node = node->next;
-//	i = node->nbr;
-//	while (node != NULL)
-//	{
-//		if (node->nbr < i && node->marker == 1)
-//			i = node->nbr;
-//		node = node->next;
-//	}
-//	return (i);
-//}
-
 /*
 ** Push all marked items of stack to stack2.
- */
+*/
 
-t_push 		*push_to_scnd_stack(t_push **node1, t_output **out, int swapper)
+t_push		*push_to_scnd_stack(t_push **node1, t_output **out, int swapper)
 {
 	t_push	*node2;
 	t_push	*head;
@@ -145,10 +129,10 @@ void		mark_stack(t_push **node1, int i, int iters)
 	put_index(node1);
 	while ((*node1)->next != NULL)
 	{
-		if ((*node1)->index >= median * i && (i + 1 == iters ? 1 : (*node1)->index < median * (i + 1)))
+		if ((*node1)->index >= median * i && (i + 1 == iters ? 1 :
+											(*node1)->index < median * (i + 1)))
 			(*node1)->marker = 1;
 		*node1 = (*node1)->next;
 	}
 	*node1 = head;
 }
-

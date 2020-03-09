@@ -1,10 +1,18 @@
-//
-// Created by Igor Krasnov on 08.03.20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   put_index.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rofeldsp <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/09 11:44:20 by rofeldsp          #+#    #+#             */
+/*   Updated: 2020/03/09 11:44:21 by rofeldsp         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	leave_marks3(t_push **node1)
+void		leave_marks3(t_push **node1)
 {
 	t_push		*head;
 	int			num;
@@ -23,7 +31,7 @@ void	leave_marks3(t_push **node1)
 	*node1 = head;
 }
 
-int 	leave_marks2(t_push **node1, int buf2, int swapper)
+int			leave_marks2(t_push **node1, int buf2, int swapper)
 {
 	if (best_sequence(*node1) > check_sequence(*node1))
 	{
@@ -82,9 +90,9 @@ int64_t		find_smallest_not_indexed(t_push *node)
 	return (i);
 }
 
-void	put_index(t_push **node)
+void		put_index(t_push **node)
 {
-	int64_t 	smallest_n;
+	int64_t		smallest_n;
 	int			i;
 	int			j;
 
@@ -102,4 +110,3 @@ void	put_index(t_push **node)
 	while (j-- != 0)
 		*node = ft_reverse(*node);
 }
-

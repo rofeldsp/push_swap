@@ -12,22 +12,6 @@
 
 #include "push_swap.h"
 
-int 		stack_length(t_push *node)
-{
-	int i;
-
-	if (node == NULL)
-		return (0);
-	else
-		i = 1;
-	while (node->next != NULL)
-	{
-		node = node->next;
-		i++;
-	}
-	return(i);
-}
-
 void		check_for_errors(t_push **node)
 {
 	t_push *head;
@@ -63,12 +47,12 @@ void		add_list(t_push *node, char **str)
 	node->next = node2;
 	node2->prev = node;
 	check_for_overload(*str);
-		node2->nbr = ft_atoll(str[0]);
+	node2->nbr = ft_atoll(str[0]);
 	if (*(str + 1))
 		add_list(node2, str + 1);
 }
 
-void 		check_for_overload(char *str)
+void		check_for_overload(char *str)
 {
 	int j;
 
@@ -84,14 +68,28 @@ void 		check_for_overload(char *str)
 		if (ft_atoll(str) > 0)
 			print_error();
 	}
-	else
-		if (ft_atoll(str) < 0)
-			print_error();
+	else if (ft_atoll(str) < 0)
+		print_error();
+}
+
+int			parse_flags(t_push **node, int i, char **str2)
+{
+	if (ft_strequ(str2[i], "-v"))
+	{
+		(*node)->debug_opt |= DEBUG;
+		i++;
+	}
+	if (ft_strequ(str2[i], "-c"))
+	{
+		(*node)->debug_opt |= COLOR;
+		i++;
+	}
+	return (i);
 }
 
 t_push		*parse_stack(char *str)
 {
-	int 	i;
+	int		i;
 	t_push	*node;
 	char	**str2;
 
@@ -100,18 +98,9 @@ t_push		*parse_stack(char *str)
 		print_error();
 	node->debug_opt = 0;
 	str2 = ft_strsplit(str, ' ');
-	if (ft_strequ(str2[i], "-v"))
-	{
-		node->debug_opt |= DEBUG;
-		i++;
-	}
-	if (ft_strequ(str2[i], "-c"))
-	{
-		node->debug_opt |= COLOR;
-		i++;
-	}
+	i = parse_flags(&node, i, str2);
 	check_for_overload(str2[i]);
-		node->nbr = ft_atoll(str2[i++]);
+	node->nbr = ft_atoll(str2[i++]);
 	node->next = NULL;
 	node->prev = NULL;
 	node->marker = 0;
@@ -123,5 +112,5 @@ t_push		*parse_stack(char *str)
 		free(str2[i++]);
 	free(str2);
 	check_for_errors(&node);
-	return(node);
+	return (node);
 }

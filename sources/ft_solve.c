@@ -14,7 +14,7 @@
 
 void	ft_solve3(t_push **node1, t_push **node2, t_output **out, int iters)
 {
-	int 		i;
+	int		i;
 
 	i = 0;
 	while (i < iters)
@@ -41,13 +41,13 @@ void	ft_solve2(t_push **node1, t_push **node2, t_output **out)
 /*
 ** Function responsible for finding solution. We use swapper in different
 ** situations, because of 5 variable limitation of ecole 42.
- */
+*/
 
 void	ft_solve(t_push **node1)
 {
-	t_push 		*node2;
+	t_push		*node2;
 	t_output	*out;
-	int 		iterations;
+	int			iterations;
 
 	if (best_sequence(*node1) == stack_length(*node1))
 		return ;
@@ -69,5 +69,20 @@ void	ft_solve(t_push **node1)
 	out = combine_rotations(&out);
 	display_output(out);
 	free_output(out);
-	free_node(*node1);
+}
+
+int		stack_length(t_push *node)
+{
+	int i;
+
+	if (node == NULL)
+		return (0);
+	else
+		i = 1;
+	while (node->next != NULL)
+	{
+		node = node->next;
+		i++;
+	}
+	return (i);
 }

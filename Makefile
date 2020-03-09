@@ -48,6 +48,7 @@ SOURCE_FILES = push_swap.c \
             find_best_sequence.c
 
 SOURCE_FILES_CHECKER = checker.c \
+            increase_buffer.c \
             parse_string.c \
             print_error.c \
             parse_stack.c \

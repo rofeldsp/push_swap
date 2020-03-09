@@ -1,13 +1,21 @@
-//
-// Created by Igor Krasnov on 09.03.20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   find_best_sequence.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rofeldsp <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/09 12:13:02 by rofeldsp          #+#    #+#             */
+/*   Updated: 2020/03/09 12:13:04 by rofeldsp         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-int 	check_sequence(t_push *node)
+int		check_sequence(t_push *node)
 {
-	int 	i;
-	int 	num;
+	int		i;
+	int		num;
 
 	i = 1;
 	num = node->nbr;
@@ -25,10 +33,10 @@ int 	check_sequence(t_push *node)
 	return (i);
 }
 
-int 	check_index_sequence(t_push *node)
+int		check_index_sequence(t_push *node)
 {
-	int 	i;
-	int 	num;
+	int		i;
+	int		num;
 
 	i = 1;
 	num = node->index;
@@ -43,7 +51,7 @@ int 	check_index_sequence(t_push *node)
 	return (i);
 }
 
-int 	best_sequence(t_push *node)
+int		best_sequence(t_push *node)
 {
 	int len;
 	int swap_len;

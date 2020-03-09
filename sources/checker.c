@@ -12,50 +12,45 @@
 
 #include "push_swap.h"
 
-char 	*ft_increase_buffer(char **str)
+void	parse_insructions2(t_push **node1, t_push **node2, int i, char *str)
 {
-	char *dest;
-
-	if (!(dest = ft_strnew(ft_strlen(*str) + BUFFER + 1)))
+	if (!(ft_strncmp(str + i, "pa", 2)))
+		ft_push(node2, node1);
+	else if (!(ft_strncmp(str + i, "pb", 2)))
+		ft_push(node1, node2);
+	else if (!(ft_strncmp(str + i, "sa", 2)))
+		*node1 = ft_swap(*node1);
+	else if (!(ft_strncmp(str + i, "sb", 2)))
+		*node2 = ft_swap(*node2);
+	else if (!(ft_strncmp(str + i, "ss", 2)))
+	{
+		*node1 = ft_swap(*node1);
+		*node2 = ft_swap(*node2);
+	}
+	else if (!(ft_strncmp(str + i, "rra", 3)))
+		*node1 = ft_reverse(*node1);
+	else if (!(ft_strncmp(str + i, "rrb", 3)))
+		*node2 = ft_reverse(*node2);
+	else if (!(ft_strncmp(str + i, "rrr", 3)))
+	{
+		*node1 = ft_reverse(*node1);
+		*node2 = ft_reverse(*node2);
+	}
+	else
 		print_error();
-	dest = ft_strcpy(dest, *str);
-	free(*str);
-	return(dest);
 }
 
 void	parse_instructions(char *str, t_push **node1)
 {
-	int i;
+	int		i;
 	t_push	*node2;
 
 	i = 0;
 	node2 = allocate_struct(sizeof(t_push));
 	node2->nbr = EMPTY_NODE;
-	while(str[i])
+	while (str[i])
 	{
-		if (!(ft_strncmp(str + i, "pa", 2)))
-			ft_push(&node2, node1);
-		else if (!(ft_strncmp(str + i, "pb", 2)))
-			ft_push(node1, &node2);
-		else if (!(ft_strncmp(str + i, "sa", 2)))
-			*node1 = ft_swap(*node1);
-		else if (!(ft_strncmp(str + i, "sb", 2)))
-			node2 = ft_swap(node2);
-		else if (!(ft_strncmp(str + i, "ss", 2)))
-		{
-			*node1 = ft_swap(*node1);
-			node2 = ft_swap(node2);
-		}
-		else if (!(ft_strncmp(str + i, "rra", 3)))
-			*node1 = ft_reverse(*node1);
-		else if (!(ft_strncmp(str + i, "rrb", 3)))
-			node2 = ft_reverse(node2);
-		else if (!(ft_strncmp(str + i, "rrr", 3)))
-		{
-			*node1 = ft_reverse(*node1);
-			node2 = ft_reverse(node2);
-		}
-		else if (!(ft_strncmp(str + i, "ra", 2)))
+		if (!(ft_strncmp(str + i, "ra", 2)))
 			*node1 = ft_rotate(*node1);
 		else if (!(ft_strncmp(str + i, "rb", 2)))
 			node2 = ft_rotate(node2);
@@ -65,7 +60,7 @@ void	parse_instructions(char *str, t_push **node1)
 			node2 = ft_rotate(node2);
 		}
 		else
-			print_error();
+			parse_insructions2(node1, &node2, i, str);
 		if (!(ft_strncmp(str + i, "rrr", 3)) || !(ft_strncmp(str + i, "rra", 3))
 				|| !(ft_strncmp(str + i, "rrb", 3)))
 			i += 4;
@@ -74,12 +69,12 @@ void	parse_instructions(char *str, t_push **node1)
 	}
 }
 
-int 	check_output(t_push **node1)
+int		check_output(t_push **node1)
 {
-	int ret;
-	int buf;
-	char *str;
-	int 	stack_len;
+	int		ret;
+	int		buf;
+	char	*str;
+	int		stack_len;
 
 	stack_len = stack_length(*node1);
 	buf = 0;
@@ -101,19 +96,15 @@ int 	check_output(t_push **node1)
 	return (0);
 }
 
-int 	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	int result;
-	char *str;
-	t_push *node;
+	int		result;
+	char	*str;
+	t_push	*node;
 
 	if (argc == 1)
-	{
 		print_error();
-		exit(33); // почему без этого не компилится?
-	}
-	else
-		str = parse_input(argc, argv);
+	str = parse_input(argc, argv);
 	node = parse_stack(str);
 	result = check_output(&node);
 	if (result == 1)

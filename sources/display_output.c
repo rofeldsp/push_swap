@@ -12,8 +12,7 @@
 
 #include "push_swap.h"
 
-
-void 		display_output2(t_output *out)
+void		display_output2(t_output *out)
 {
 	if (out->oper == ROT_A)
 		write(1, "ra", 2);
@@ -44,8 +43,7 @@ void		display_output(t_output *out)
 		else if (out->oper == PUSH_B)
 			write(1, "pb", 2);
 		display_output2(out);
-//		if (out->next != NULL)
-			write(1, "\n", 1);
+		write(1, "\n", 1);
 		out = out->next;
 	}
 }
@@ -61,12 +59,12 @@ void		display_output(t_output *out)
 ** 2) Counter of RB operations
 ** 3) Counter of RRA operations
 ** 4) Counter of RRB operations
- */
+*/
 
 void		combine_rotations3(t_output **out, int counter[4])
 {
 	while ((counter[0] != 0 && counter[1] != 0) ||
-		   (counter[2] != 0 && counter[3] != 0))
+										(counter[2] != 0 && counter[3] != 0))
 	{
 		if (counter[0] != 0 && counter[1] != 0)
 		{
@@ -107,7 +105,7 @@ void		combine_rotations2(t_output **out, int counter[4])
 t_output	*combine_rotations(t_output **out)
 {
 	t_output	*head;
-	int 		counter[4];
+	int			counter[4];
 
 	head = *out;
 	while ((*out)->next != NULL)

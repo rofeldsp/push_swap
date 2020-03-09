@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoll.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rofeldsp <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/09 12:24:26 by rofeldsp          #+#    #+#             */
+/*   Updated: 2020/03/09 12:24:27 by rofeldsp         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static long long int	ft_shortcut(char *str, long long int a, long long int i)
@@ -25,7 +37,7 @@ static long long int	ft_shortcut(char *str, long long int a, long long int i)
 }
 
 static long long int	ft_negativenbr(char *str, long long int a,
-									   long long int i)
+															long long int i)
 {
 	long long int	number;
 	long long int	dgt;
@@ -48,7 +60,7 @@ static long long int	ft_negativenbr(char *str, long long int a,
 	return (0);
 }
 
-long long int	ft_atoll(const char *str)
+long long int			ft_atoll(const char *str)
 {
 	long long int	i;
 	long long int	a;

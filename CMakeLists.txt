@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(pushswap C)
+project(push_swap_owngit C)
 
 set(CMAKE_C_STANDARD 11)
 
@@ -7,7 +7,7 @@ include_directories(include)
 include_directories(libft)
 include_directories(libft/ft_printf/include)
 
-add_executable(pushswap
+add_executable(push_swap_owngit
     include/push_swap.h
     libft/ft_printf/include/ft_printf.h
     libft/ft_printf/sources/additional_functions.c
@@ -95,20 +95,22 @@ add_executable(pushswap
     libft/ft_tolower.c
     libft/ft_toupper.c
     libft/libft.h
-        sources/ft_solve.c
-        sources/sort_stacks.c
-        sources/sort_first_stack.c
-        sources/display_output.c
-        sources/what_to_push.c
-        sources/push_to_scnd_stack.c
     sources/allocate_struct.c
 #    sources/checker.c
+    sources/display_output.c
     sources/display_stacks.c
+    sources/find_best_sequence.c
     sources/free_node.c
+    sources/ft_solve.c
     sources/instructions.c
     sources/instructions_output.c
     sources/parse_stack.c
     sources/parse_string.c
     sources/print_error.c
     sources/push_swap.c
-        sources/put_index.c sources/find_best_sequence.c sources/put_reverses.c)
+    sources/push_to_scnd_stack.c
+    sources/put_index.c
+    sources/put_reverses.c
+    sources/sort_first_stack.c
+    sources/sort_stacks.c
+    sources/what_to_push.c sources/increase_buffer.c)

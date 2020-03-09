@@ -15,7 +15,7 @@
 void	display_stacks_in_color(t_push *n1, t_push *n2)
 {
 	ft_printf("{yellow}---------{red}Stack A{yellow}---------||-"
-		   					"--------{red}Stack B{yellow}---------\n");
+	"--------{red}Stack B{yellow}---------\n");
 	while (n1 != NULL || n2 != NULL)
 	{
 		if (n1 == NULL || n1->nbr == EMPTY_NODE)
@@ -33,8 +33,7 @@ void	display_stacks_in_color(t_push *n1, t_push *n2)
 			n2 = n2->next;
 	}
 	ft_printf("--------------------------------------------------"
-		  														 "--\n{eoc}");
-
+	"--\n{eoc}");
 }
 
 void	display_stacks(t_push *node1, t_push *node2, int stack_n)
@@ -58,10 +57,8 @@ void	display_stacks(t_push *node1, t_push *node2, int stack_n)
 				ft_printf("|%-24d||%24c|\n", n1->nbr, ' ');
 			else
 				ft_printf("|%-24d||%24d|\n", n1->nbr, n2->nbr);
-			if (n1 != NULL)
-				n1 = n1->next;
-			if (n2 != NULL)
-				n2 = n2->next;
+			n1 = (n1 != NULL ? n1->next : n1);
+			n2 = (n2 != NULL ? n2->next : n2);
 		}
 		ft_putstr("----------------------------------------------------\n");
 	}

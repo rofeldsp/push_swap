@@ -42,7 +42,7 @@ int			find_largest_nbr(t_push *node)
 
 /*
 ** Sort stack1 so the head->nbr will be bigger than node-nbr from stack2.
- */
+*/
 
 t_push		*sort_first_stack(t_push *node, t_push *node2,
 													int nbr, t_output **out)
@@ -56,10 +56,10 @@ t_push		*sort_first_stack(t_push *node, t_push *node2,
 	else
 	{
 		while (node->next != NULL && (!(nbr > node->nbr) ||
-									  !(nbr < node->next->nbr)))
+												!(nbr < node->next->nbr)))
 			node = node->next;
 		if (node->next == NULL)
-			return(head);
+			return (head);
 		else
 			node = node->next;
 	}
@@ -75,7 +75,7 @@ t_push		*sort_first_stack(t_push *node, t_push *node2,
 
 /*
 ** Calculate a number of steps to rotate stack1 to push node fro, stack2.
- */
+*/
 
 int			len_to_push(t_push *node, int nbr)
 {
@@ -87,7 +87,7 @@ int			len_to_push(t_push *node, int nbr)
 	else
 	{
 		while (node->next != NULL && (!(nbr > node->nbr) ||
-									  !(nbr < node->next->nbr)))
+									!(nbr < node->next->nbr)))
 			node = node->next;
 		if (node->next == NULL)
 			return (0);
@@ -102,7 +102,7 @@ int			len_to_push(t_push *node, int nbr)
 
 /*
 ** Rotate stack, so all the numbers will be in ascending order
- */
+*/
 
 t_push		*rotate_ascending(t_push *node, t_push *node2, t_output **out)
 {
