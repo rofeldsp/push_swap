@@ -12,6 +12,24 @@
 
 #include "push_swap.h"
 
+int			check_spaces(char *str)
+{
+	int		i;
+	int		j;
+	int		spaces;
+
+	j = ft_strlen(str);
+	i = 0;
+	spaces = 0;
+	while (str[i])
+	{
+		if (str[i] == ' ')
+			spaces++;
+		i++;
+	}
+	return (spaces == j ? 1 : 0);
+}
+
 char		*parse_input(int argc, char **argv)
 {
 	int		i;
@@ -21,10 +39,14 @@ char		*parse_input(int argc, char **argv)
 	i = 1;
 	if (*argv[i] == '\0')
 		print_error();
+	if (check_spaces(argv[i]) == 1)
+		print_error();
 	if (!(str = ft_strdup(argv[i++])))
 		print_error();
 	while (i < argc)
 	{
+		if (check_spaces(argv[i]) == 1)
+			print_error();
 		if (!(tmp = ft_strjoin(str, " ")))
 			print_error();
 		free(str);

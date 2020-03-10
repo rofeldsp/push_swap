@@ -86,7 +86,8 @@ void		combine_rotations3(t_output **out, int counter[4])
 			counter[2]--;
 			counter[3]--;
 		}
-		*out = (*out)->prev;
+		else
+			*out = (*out)->prev;
 	}
 }
 

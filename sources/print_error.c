@@ -15,11 +15,11 @@
 void	print_error_fd(void)
 {
 	write(2, "Failed to open file\n", 20);
-	exit(33);
+	exit(1);
 }
 
 void	print_error(void)
 {
 	write(2, "Error\n", 6);
-	exit(33);
+	exit(1);
 }

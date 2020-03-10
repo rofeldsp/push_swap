@@ -108,6 +108,7 @@ void					sort_stacks(t_push **node1, t_push **node2,
 															t_output **out);
 int						count_marked_nodes(t_push *node);
 int						find_smallest_nbr(t_push *node);
+int						find_largest_nbr(t_push *node);
 t_push					*go_to_start(t_push *node);
 int						len_to_start(t_push *node);
 int						len_to_end(t_push *node);
