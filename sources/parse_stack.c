@@ -101,6 +101,8 @@ t_push		*parse_stack(char *str)
 		print_error();
 	node->debug_opt = 0;
 	str2 = ft_strsplit(str, ' ');
+	if (*str2 == NULL)
+		print_error();
 	i = parse_flags(&node, i, str2);
 	check_for_overload(str2[i]);
 	node->nbr = ft_atoll(str2[i++]);

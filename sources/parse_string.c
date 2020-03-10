@@ -19,6 +19,8 @@ char		*parse_input(int argc, char **argv)
 	char	*tmp;
 
 	i = 1;
+	if (*argv[i] == '\0')
+		print_error();
 	if (!(str = ft_strdup(argv[i++])))
 		print_error();
 	while (i < argc)
@@ -26,6 +28,8 @@ char		*parse_input(int argc, char **argv)
 		if (!(tmp = ft_strjoin(str, " ")))
 			print_error();
 		free(str);
+		if (*argv[i] == '\0')
+			print_error();
 		if (!(str = ft_strjoin(tmp, argv[i++])))
 			print_error();
 		free(tmp);
