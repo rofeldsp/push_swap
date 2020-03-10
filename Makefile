@@ -16,7 +16,7 @@ CHECKER = checker
 
 FLAGS = -Wall -Wextra -Werror
 
-DIR_LIBFT = ./libft
+DIR_LIBFT = libft
 
 DIR_SOURCES = sources/
 

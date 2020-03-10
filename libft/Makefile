@@ -100,6 +100,6 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	make fclean -C $(PRINTF)
+	make fclean -C $(DIR_PRINTF)
 
 re: fclean all
