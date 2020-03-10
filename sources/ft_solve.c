@@ -111,6 +111,11 @@ void	ft_solve(t_push **node1, int *fd)
 	ft_solve2(node1, &node2, &out);
 //	else if (stack_length(*node1) <= 200)
 //	{
+//	out2 = allocate_output_struct(sizeof(t_output));
+//	if (stack_length(*node1) <= 50)
+		ft_solve2(node1, &node2, &out);
+//	else if (stack_length(*node1) <= 200)
+//	{
 		iterations = 1;
 		ft_solve3(&node1_2, &node2, &out2, iterations);
 //	}
