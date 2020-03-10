@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-C = gcc
+CC = gcc
 
 NAME = libftprintf.a
 
@@ -22,33 +22,34 @@ DIR_S = sources
 
 DIR_O = object_files
 
-HEADER = include
+DIR_HEADER = include
+HEADER = $(DIR_HEADER)/ft_printf.h
 
 SOURCES = ft_printf.c \
-          get_flag.c \
-          get_precision.c \
-          get_size.c \
-          get_type.c \
-          get_width.c \
-          parse_char.c \
-          parse_string.c \
-          parse_decimal.c \
-          parse_percent.c \
-          parse_hexodecimal.c \
-          ft_putstr_printf.c \
-          parse_octal.c \
-          parse_udecimal.c \
-          parse_pointer.c \
-          parse_float.c \
-          parse_float_2.c \
-          print_color.c \
-          parse_binary.c \
-          parse_unicode.c \
-          additional_functions.c \
-          adjust_to_width.c \
-          adjust_to_flag.c \
-          adjust_to_precision.c \
-          adjust_to_precision_2.c
+		get_flag.c \
+		get_precision.c \
+		get_size.c \
+		get_type.c \
+		get_width.c \
+		parse_char.c \
+		parse_string.c \
+		parse_decimal.c \
+		parse_percent.c \
+		parse_hexodecimal.c \
+		ft_putstr_printf.c \
+		parse_octal.c \
+		parse_udecimal.c \
+		parse_pointer.c \
+		parse_float.c \
+		parse_float_2.c \
+		print_color.c \
+		parse_binary.c \
+		parse_unicode.c \
+		additional_functions.c \
+		adjust_to_width.c \
+		adjust_to_flag.c \
+		adjust_to_precision.c \
+		adjust_to_precision_2.c
 
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 
@@ -58,23 +59,21 @@ OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-# 	@make -C $(LIBFT)
-# 	@cp libft/libft.a ./$(NAME)
-	@ar rc $(NAME) $(OBJS)
-	@ranlib $(NAME)
+$(NAME): $(DIR_O) $(OBJS)
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
 
-$(DIR_O)/%.o: $(DIR_S)/%.c
-	@mkdir -p object_files
-	@$(CC) $(FLAGS) -I $(HEADER) -o $@ -c $<
+$(DIR_O):
+	mkdir -p object_files
+
+$(DIR_O)/%.o: $(DIR_S)/%.c $(HEADER)
+	$(CC) $(FLAGS) -I $(DIR_HEADER) -o $@ -c $<
 
 clean:
-	@rm -f $(OBJS)
-	@rm -rf $(DIR_O)
-# 	@make clean -C $(LIBFT)
+	rm -f $(OBJS)
+	rm -rf $(DIR_O)
 
 fclean: clean
-	@rm -f $(NAME)
-# 	@make fclean -C $(LIBFT)
+	rm -f $(NAME)
 
 re: fclean all

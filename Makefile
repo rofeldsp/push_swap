@@ -1,5 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
@@ -10,94 +8,93 @@
 #                                                                              #
 # **************************************************************************** #
 
-C = gcc
+CC = gcc
 
-NAME = push_swap
+PUSH_SWAP = push_swap
 
-NAME2 = checker
+CHECKER = checker
 
 FLAGS = -Wall -Wextra -Werror
 
-LIBFT = libft
+DIR_LIBFT = ./libft
 
-LIBA = libft/libft.a
+DIR_SOURCES = sources/
 
-DIR_S = sources/
+DIR_HEADER = include
 
-DIR_O = object_files
+HEADER = include/push_swap.h
 
-HEADER = include
-
-SOURCE_FILES = push_swap.c \
-            parse_string.c \
-            print_error.c \
-            parse_stack.c \
-            ft_check_fd.c \
-            ft_solve.c \
-            sort_stacks.c \
-            sort_first_stack.c \
-            display_output.c \
-            what_to_push.c \
-            put_reverses.c \
-            push_to_scnd_stack.c \
-            free_node.c \
-            put_index.c \
-            display_stacks.c \
-            allocate_struct.c \
-            instructions.c \
-            instructions_output.c \
-            find_best_sequence.c
+SOURCES_FILES_PUSH_SWAP = push_swap.c \
+			parse_string.c \
+			print_error.c \
+			parse_stack.c \
+			ft_check_fd.c \
+			ft_solve.c \
+			sort_stacks.c \
+			sort_first_stack.c \
+			display_output.c \
+			what_to_push.c \
+			put_reverses.c \
+			push_to_scnd_stack.c \
+			free_node.c \
+			put_index.c \
+			display_stacks.c \
+			allocate_struct.c \
+			instructions.c \
+			instructions_output.c \
+			find_best_sequence.c
 
 SOURCE_FILES_CHECKER = checker.c \
-            increase_buffer.c \
-            parse_string.c \
-            print_error.c \
-            create_node2.c\
-            parse_stack.c \
-            put_index.c \
-            ft_check_fd.c \
-            free_node.c \
-            display_stacks.c \
-            ft_solve.c \
-            put_reverses.c \
-            sort_stacks.c \
-            sort_first_stack.c \
-            display_output.c \
-            what_to_push.c \
-            push_to_scnd_stack.c \
-            allocate_struct.c \
-            instructions.c \
-            find_best_sequence.c \
-            instructions_output.c
+			increase_buffer.c \
+			parse_string.c \
+			print_error.c \
+			create_node2.c\
+			parse_stack.c \
+			put_index.c \
+			ft_check_fd.c \
+			free_node.c \
+			display_stacks.c \
+			ft_solve.c \
+			put_reverses.c \
+			sort_stacks.c \
+			sort_first_stack.c \
+			display_output.c \
+			what_to_push.c \
+			push_to_scnd_stack.c \
+			allocate_struct.c \
+			instructions.c \
+			find_best_sequence.c \
+			instructions_output.c
 
-SOURCES = $(addprefix $(DIR_S), $(SOURCE_FILES))
+SOURCES_PUSH_SWAP = $(addprefix $(DIR_SOURCES), $(SOURCES_FILES_PUSH_SWAP))
+SOURCES_CHECKER = $(addprefix $(DIR_SOURCES), $(SOURCE_FILES_CHECKER))
 
-SOURCES_CHECKER = $(addprefix $(DIR_S), $(SOURCE_FILES_CHECKER))
+OBJECTS_PUSH_SWAP = $(SOURCES_PUSH_SWAP:.c=.o)
+OBJECTS_CHECKER = $(SOURCES_CHECKER:.c=.o)
 
-SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
+.PHONY: all clean fclean re force
 
-# OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
+all: lib $(CHECKER) $(PUSH_SWAP)
 
-.PHONY: all clean fclean re
+lib:
+	make -C ./libft
 
-all: $(NAME) $(NAME2)
+$(CHECKER): $(OBJECTS_CHECKER)
+	$(CC) $(FLAGS) $(OBJECTS_CHECKER) -L $(DIR_LIBFT) -lft -o $(CHECKER)
 
-$(NAME):
-	@make -C $(LIBFT)
-	@ranlib $(LIBA)
-	@$(CC) $(FLAGS) $(SOURCES) -I $(HEADER) $(LIBA) $(PRINTF) -o $(NAME)
+$(PUSH_SWAP): $(OBJECTS_PUSH_SWAP)
+	$(CC) $(FLAGS) $(OBJECTS_PUSH_SWAP) -L $(DIR_LIBFT) -lft -o $(PUSH_SWAP)
 
-$(NAME2):
-	@$(CC) $(FLAGS) $(SOURCES_CHECKER) -I $(HEADER) $(LIBA) -o $(NAME2)
+$(DIR_SOURCES)%.o: $(DIR_SOURCES)%.c $(HEADER)
+	$(CC) $(FLAGS) -I $(DIR_HEADER) -c $< -o $@
 
 clean:
-# 	@rm -f $(OBJS)
-# 	@rm -rf $(DIR_O)
-	@make clean -C $(LIBFT)
+	make clean -C $(DIR_LIBFT)
+	rm -f $(OBJECTS_PUSH_SWAP) $(OBJECTS_CHECKER)
 
 fclean: clean
-	@rm -f $(NAME)
-	@rm -f $(NAME2)
-	@make fclean -C $(LIBFT)
+	rm -f $(CHECKER)
+	rm -f $(PUSH_SWAP)
+	make fclean -C $(DIR_LIBFT)
 
 re: fclean all
