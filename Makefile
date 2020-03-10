@@ -20,11 +20,13 @@ DIR_LIBFT = libft
 
 DIR_SOURCES = sources/
 
+DIR_OBJECTS = obj_files
+
 DIR_HEADER = include
 
 HEADER = include/push_swap.h
 
-SOURCES_FILES_PUSH_SWAP = push_swap.c \
+SOURCE_FILES_PUSH_SWAP = push_swap.c \
 			parse_string.c \
 			print_error.c \
 			parse_stack.c \
@@ -66,15 +68,15 @@ SOURCE_FILES_CHECKER = checker.c \
 			find_best_sequence.c \
 			instructions_output.c
 
-SOURCES_PUSH_SWAP = $(addprefix $(DIR_SOURCES), $(SOURCES_FILES_PUSH_SWAP))
+SOURCES_PUSH_SWAP = $(addprefix $(DIR_SOURCES), $(SOURCE_FILES_PUSH_SWAP))
 SOURCES_CHECKER = $(addprefix $(DIR_SOURCES), $(SOURCE_FILES_CHECKER))
 
-OBJECTS_PUSH_SWAP = $(SOURCES_PUSH_SWAP:.c=.o)
-OBJECTS_CHECKER = $(SOURCES_CHECKER:.c=.o)
+OBJECTS_PUSH_SWAP = $(addprefix $(DIR_OBJECTS)/,$(SOURCE_FILES_PUSH_SWAP:.c=.o))
+OBJECTS_CHECKER = $(addprefix $(DIR_OBJECTS)/,$(SOURCE_FILES_CHECKER:.c=.o))
 
 .PHONY: all clean fclean re force
 
-all: lib $(CHECKER) $(PUSH_SWAP)
+all: lib $(DIR_OBJECTS) $(CHECKER) $(PUSH_SWAP)
 
 lib:
 	make -C ./libft
@@ -85,12 +87,16 @@ $(CHECKER): $(OBJECTS_CHECKER)
 $(PUSH_SWAP): $(OBJECTS_PUSH_SWAP)
 	$(CC) $(FLAGS) $(OBJECTS_PUSH_SWAP) -L $(DIR_LIBFT) -lft -o $(PUSH_SWAP)
 
-$(DIR_SOURCES)%.o: $(DIR_SOURCES)%.c $(HEADER)
+$(DIR_OBJECTS)/%.o: $(DIR_SOURCES)/%.c $(HEADER)
 	$(CC) $(FLAGS) -I $(DIR_HEADER) -c $< -o $@
+
+$(DIR_OBJECTS):
+	mkdir -p $(DIR_OBJECTS)
 
 clean:
 	make clean -C $(DIR_LIBFT)
-	rm -f $(OBJECTS_PUSH_SWAP) $(OBJECTS_CHECKER)
+# 	rm -f $(OBJECTS_PUSH_SWAP) $(OBJECTS_CHECKER)
+	rm -rf $(DIR_OBJECTS)
 
 fclean: clean
 	rm -f $(CHECKER)
