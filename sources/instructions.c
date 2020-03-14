@@ -19,7 +19,8 @@ t_push		*ft_swap(t_push *node)
 	if (node->next == NULL)
 		return (node);
 	tmp = node->next;
-	node->next->next->prev = node;
+	if (node->next->next != NULL)
+		node->next->next->prev = node;
 	node->next = node->next->next;
 	node->prev = tmp;
 	tmp->next = node;

@@ -157,5 +157,6 @@ void					create_node2(t_push **node2);
 int						ft_check_fd(t_push **node1);
 void					fd_to_output(int flag, int *fd);
 t_output				**best_solution(t_push **node1);
+t_push					*copy_stack(t_push *node);
 
 #endif

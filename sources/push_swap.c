@@ -18,12 +18,15 @@ int		main(int argc, char **argv)
 	t_push		*node;
 	int			fd;
 
+	fd = 1;
 	if (argc == 1)
 		print_error();
 	str = parse_input(argc, argv);
-	node = parse_stack(str);
+	if (!(node = parse_stack(str)))
+		print_error();
 	ft_solve(&node, &fd);
-	close(fd);
+	if (fd > 2)
+		close(fd);
 	free_node(node);
 	free(str);
 	return (0);

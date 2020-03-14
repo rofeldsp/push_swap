@@ -17,9 +17,6 @@ DIR_HEADER = include/
 HEADER = include/libft.h \
         include/ft_printf.h
 
-# DIR_PRINTF = ft_printf
-# LIB_PRINTF = $(DIR_PRINTF)/libftprintf.a
-
 SRCS = ft_atoi.c \
     ft_atoll.c \
     ft_bzero.c \
@@ -111,23 +108,17 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) #$(LIB_PRINTF)
-# 	cp $(DIR_PRINTF)/libftprintf.a $(NAME)
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
+$(NAME): $(OBJS)
+	@ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
 
 %.o: %.c $(HEADER)
-	gcc -Wall -Wextra -Werror -I $(DIR_HEADER) -c $< -o $@
-
-# $(LIB_PRINTF): force
-# 	make -C $(DIR_PRINTF)
+	@gcc -Wall -Wextra -Werror -I $(DIR_HEADER) -c $< -o $@
 
 clean: 
-	rm -f $(OBJS) 
-# 	make clean -C $(DIR_PRINTF)
+	@rm -f $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
-# 	make fclean -C $(DIR_PRINTF)
+	@rm -f $(NAME)
 
 re: fclean all

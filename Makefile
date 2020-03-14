@@ -81,28 +81,27 @@ OBJECTS_CHECKER = $(addprefix $(DIR_OBJECTS)/,$(SOURCE_FILES_CHECKER:.c=.o))
 all: lib $(DIR_OBJECTS) $(CHECKER) $(PUSH_SWAP)
 
 lib:
-	make -C ./libft
+	@make -C ./libft
 
 $(CHECKER): $(OBJECTS_CHECKER)
-	$(CC) $(FLAGS) $(OBJECTS_CHECKER) -L $(DIR_LIBFT) -lft -o $(CHECKER)
+	@$(CC) $(FLAGS) $(OBJECTS_CHECKER) -L $(DIR_LIBFT) -lft -o $(CHECKER)
 
 $(PUSH_SWAP): $(OBJECTS_PUSH_SWAP)
-	$(CC) $(FLAGS) $(OBJECTS_PUSH_SWAP) -L $(DIR_LIBFT) -lft -o $(PUSH_SWAP)
+	@$(CC) $(FLAGS) $(OBJECTS_PUSH_SWAP) -L $(DIR_LIBFT) -lft -o $(PUSH_SWAP)
 
 $(DIR_OBJECTS)/%.o: $(DIR_SOURCES)/%.c $(HEADER)
-	$(CC) $(FLAGS) -I $(DIR_HEADER) -c $< -o $@
+	@$(CC) $(FLAGS) -I $(DIR_HEADER) -c $< -o $@
 
 $(DIR_OBJECTS):
-	mkdir -p $(DIR_OBJECTS)
+	@mkdir -p $(DIR_OBJECTS)
 
 clean:
-	make clean -C $(DIR_LIBFT)
-# 	rm -f $(OBJECTS_PUSH_SWAP) $(OBJECTS_CHECKER)
-	rm -rf $(DIR_OBJECTS)
+	@make clean -C $(DIR_LIBFT)
+	@rm -rf $(DIR_OBJECTS)
 
 fclean: clean
-	rm -f $(CHECKER)
-	rm -f $(PUSH_SWAP)
-	make fclean -C $(DIR_LIBFT)
+	@rm -f $(CHECKER)
+	@rm -f $(PUSH_SWAP)
+	@make fclean -C $(DIR_LIBFT)
 
 re: fclean all

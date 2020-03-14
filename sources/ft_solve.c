@@ -12,6 +12,22 @@
 
 #include "push_swap.h"
 
+int		is_sorted(t_push *node1)
+{
+	int		num;
+
+	num = node1->nbr;
+	node1 = node1->next;
+	while (node1 != NULL)
+	{
+		if (node1->nbr < num)
+			return (0);
+		else
+			node1 = node1->next;
+	}
+	return (1);
+}
+
 int		stack_length2(t_output *node)
 {
 	int i;
@@ -37,7 +53,7 @@ void	ft_solve(t_push **node1, int *fd)
 {
 	t_output	**out;
 
-	if (best_sequence(*node1) == stack_length(*node1))
+	if (best_sequence(*node1) == stack_length(*node1) && is_sorted(*node1))
 		return ;
 	out = best_solution(node1);
 	while (out[0]->prev != NULL)

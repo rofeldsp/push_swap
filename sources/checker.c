@@ -113,10 +113,15 @@ int		main(int argc, char **argv)
 	t_push	*node;
 	int		fd;
 
+	fd = 0;
 	if (argc == 1)
 		return (0);
 	str = parse_input(argc, argv);
-	node = parse_stack(str);
+	if (!(node = parse_stack(str)))
+	{
+		free(str);
+		return (0);
+	}
 	result = check_output(&node, &fd);
 	if (fd >= 3)
 		close(fd);

@@ -87,6 +87,15 @@ int			parse_flags(t_push **node, int i, char **str2)
 			(*node)->debug_opt |= N_OPERS;
 		i++;
 	}
+	if (!(str2[i]))
+	{
+		i = 0;
+		while (str2[i])
+			free(str2[i++]);
+		free(str2);
+		free(*node);
+		return (-1);
+	}
 	return (i);
 }
 
@@ -101,14 +110,15 @@ t_push		*parse_stack(char *str)
 		print_error();
 	node->debug_opt = 0;
 	str2 = ft_strsplit(str, ' ');
-	i = parse_flags(&node, i, str2);
+	if ((i = parse_flags(&node, i, str2)) == -1)
+		return (NULL);
 	check_for_overload(str2[i]);
 	node->nbr = ft_atoll(str2[i++]);
 	node->next = NULL;
 	node->prev = NULL;
 	node->marker = 0;
 	node->index = 0;
-	if (*(str2 + 1))
+	if (*(str2 + i))
 		add_list(node, str2 + i);
 	i = 0;
 	while (str2[i])
