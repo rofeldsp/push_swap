@@ -4,37 +4,17 @@ project(push_swap_owngit C)
 set(CMAKE_C_STANDARD 11)
 
 include_directories(include)
-include_directories(libft)
-include_directories(libft/ft_printf/include)
+include_directories(libft/include)
 
 add_executable(push_swap_owngit
     include/push_swap.h
-    libft/ft_printf/include/ft_printf.h
-    libft/ft_printf/sources/additional_functions.c
-    libft/ft_printf/sources/adjust_to_flag.c
-    libft/ft_printf/sources/adjust_to_precision.c
-    libft/ft_printf/sources/adjust_to_precision_2.c
-    libft/ft_printf/sources/adjust_to_width.c
-    libft/ft_printf/sources/ft_printf.c
-    libft/ft_printf/sources/ft_putstr_printf.c
-    libft/ft_printf/sources/get_flag.c
-    libft/ft_printf/sources/get_precision.c
-    libft/ft_printf/sources/get_size.c
-    libft/ft_printf/sources/get_type.c
-    libft/ft_printf/sources/get_width.c
-    libft/ft_printf/sources/parse_binary.c
-    libft/ft_printf/sources/parse_char.c
-    libft/ft_printf/sources/parse_decimal.c
-    libft/ft_printf/sources/parse_float.c
-    libft/ft_printf/sources/parse_float_2.c
-    libft/ft_printf/sources/parse_hexodecimal.c
-    libft/ft_printf/sources/parse_octal.c
-    libft/ft_printf/sources/parse_percent.c
-    libft/ft_printf/sources/parse_pointer.c
-    libft/ft_printf/sources/parse_string.c
-    libft/ft_printf/sources/parse_udecimal.c
-    libft/ft_printf/sources/parse_unicode.c
-    libft/ft_printf/sources/print_color.c
+    libft/include/ft_printf.h
+    libft/include/libft.h
+    libft/additional_functions.c
+    libft/adjust_to_flag.c
+    libft/adjust_to_precision.c
+    libft/adjust_to_precision_2.c
+    libft/adjust_to_width.c
     libft/ft_atoi.c
     libft/ft_atoll.c
     libft/ft_bzero.c
@@ -58,6 +38,7 @@ add_executable(push_swap_owngit
     libft/ft_memdel.c
     libft/ft_memmove.c
     libft/ft_memset.c
+    libft/ft_printf.c
     libft/ft_putchar.c
     libft/ft_putchar_fd.c
     libft/ft_putendl.c
@@ -66,6 +47,7 @@ add_executable(push_swap_owngit
     libft/ft_putnbr_fd.c
     libft/ft_putstr.c
     libft/ft_putstr_fd.c
+    libft/ft_putstr_printf.c
     libft/ft_strcat.c
     libft/ft_strchr.c
     libft/ft_strclr.c
@@ -94,14 +76,34 @@ add_executable(push_swap_owngit
     libft/ft_strtrim.c
     libft/ft_tolower.c
     libft/ft_toupper.c
-    libft/libft.h
+    libft/get_flag.c
+    libft/get_precision.c
+    libft/get_size.c
+    libft/get_type.c
+    libft/get_width.c
+    libft/parse_binary.c
+    libft/parse_char.c
+    libft/parse_decimal.c
+    libft/parse_float.c
+    libft/parse_float_2.c
+    libft/parse_hexodecimal.c
+    libft/parse_octal.c
+    libft/parse_percent.c
+    libft/parse_pointer.c
+    libft/parse_string.c
+    libft/parse_udecimal.c
+    libft/parse_unicode.c
+    libft/print_color.c
     sources/allocate_struct.c
 #    sources/checker.c
+    sources/create_node2.c
     sources/display_output.c
     sources/display_stacks.c
     sources/find_best_sequence.c
     sources/free_node.c
+    sources/ft_check_fd.c
     sources/ft_solve.c
+    sources/increase_buffer.c
     sources/instructions.c
     sources/instructions_output.c
     sources/parse_stack.c
@@ -113,4 +115,4 @@ add_executable(push_swap_owngit
     sources/put_reverses.c
     sources/sort_first_stack.c
     sources/sort_stacks.c
-    sources/what_to_push.c sources/increase_buffer.c sources/create_node2.c sources/ft_check_fd.c)
+    sources/what_to_push.c sources/find_best_solution.c)

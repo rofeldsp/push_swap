@@ -156,5 +156,6 @@ void					print_error_fd(void);
 void					create_node2(t_push **node2);
 int						ft_check_fd(t_push **node1);
 void					fd_to_output(int flag, int *fd);
+t_output				**best_solution(t_push **node1);
 
 #endif

@@ -38,6 +38,7 @@ SOURCE_FILES_PUSH_SWAP = push_swap.c \
 			what_to_push.c \
 			put_reverses.c \
 			push_to_scnd_stack.c \
+			find_best_solution.c \
 			free_node.c \
 			put_index.c \
 			display_stacks.c \
@@ -57,6 +58,7 @@ SOURCE_FILES_CHECKER = checker.c \
 			free_node.c \
 			display_stacks.c \
 			ft_solve.c \
+			find_best_solution.c \
 			put_reverses.c \
 			sort_stacks.c \
 			sort_first_stack.c \
