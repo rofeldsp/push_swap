@@ -6,7 +6,11 @@ Algorithm tries three different approaches to sort stacks and chooses the best; 
 Another two algorithms divide stack to equal parts and sort each one of them using stack2. 
 
 Bonuses: 
-  -f for using file as input/output
+  -f for using file as input/output (no need to specify a file)
   -v to print stacks after each operation
   -c to do it in color
   -n to count operations needed to complete sorting 
+  
+Usage: enter flags and then unique numbers to be sorted
+  
+
