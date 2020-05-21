@@ -51,6 +51,12 @@ int		check_index_sequence(t_push *node)
 	return (i);
 }
 
+/*
+**  Find best possible sequence of numbers, using different rules:
+**  searching sequence by index, searching sequence arithmetically,
+**  and both again with first two elements swapped.
+ */
+
 int		best_sequence(t_push *node)
 {
 	int len;
